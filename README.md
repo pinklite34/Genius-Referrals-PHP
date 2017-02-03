@@ -410,7 +410,7 @@ $advocateToken = 'advocate_token';
 $name = 'name';
 $lastname = 'lastname';
 $email = 'email';
-$payoutThreshold = 30;
+$payoutThreshold = 106;
 $metadata = 'metadata';
 $canRefer = false;
 $currencyCode = 'currency_code';
@@ -486,8 +486,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 243;
-$limit = 243;
+$page = 106;
+$limit = 106;
 $filter = 'filter';
 $sort = 'sort';
 
