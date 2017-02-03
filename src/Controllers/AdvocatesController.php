@@ -423,16 +423,14 @@ class AdvocatesController extends BaseController
      *
      * @param string $accountSlug    The account identifier
      * @param string $advocateToken  The advocate's token
-     * @param string $test           (optional) test
-     * @param    array  $fieldParameters    Additional optional form parameters are supported by this endpoint
+     * @param array  $test           test
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function patchAdvocate(
         $accountSlug,
         $advocateToken,
-        $test = null,
-        $fieldParameters = null
+        $test
     ) {
 
         //the base uri for api requests
@@ -445,7 +443,6 @@ class AdvocatesController extends BaseController
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
             'account_slug'   => $accountSlug,
             'advocate_token' => $advocateToken,
-            'test'           => $test,
             ));
 
         //validate and preprocess url
@@ -455,6 +452,7 @@ class AdvocatesController extends BaseController
         $_headers = array (
             'user-agent'    => 'APIMATIC 2.0',
             'Accept'        => 'application/json',
+            'content-type'  => 'application/json; charset=utf-8',
             'Content-Type' => Configuration::$contentType,
             'X-Auth-Token' => Configuration::$xAuthToken
         );
@@ -466,7 +464,7 @@ class AdvocatesController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::patch($_queryUrl, $_headers);
+        $response = Request::patch($_queryUrl, $_headers, Request\Body::Json($test));
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);

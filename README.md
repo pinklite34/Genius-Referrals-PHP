@@ -377,8 +377,7 @@ $result = $advocates->getAdvocates($accountSlug, $page, $limit, $filter, $sort);
 function patchAdvocate(
         $accountSlug,
         $advocateToken,
-        $test = null,
-        $fieldParameters = null)
+        $test)
 ```
 
 #### Parameters
@@ -387,8 +386,7 @@ function patchAdvocate(
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
 | advocateToken |  ``` Required ```  | The advocate's token |
-| test |  ``` Optional ```  | test |
-| fieldParameters | ``` Optional ``` | Additional optional form parameters are supported by this method |
+| test |  ``` Required ```  ``` Collection ```  | test |
 
 
 
@@ -397,12 +395,10 @@ function patchAdvocate(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$test = 'test';
-// key-value map for optional form parameters
-$formParams = array('key' => 'value');
+$advocatePatchForm = new AdvocatePatchForm();
+$test = array($advocatePatchForm);
 
-
-$result = $advocates->patchAdvocate($accountSlug, $advocateToken, $test, $formParams);
+$result = $advocates->patchAdvocate($accountSlug, $advocateToken, $test);
 
 ```
 
@@ -473,8 +469,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 22;
-$limit = 22;
+$page = 89;
+$limit = 89;
 $filter = 'filter';
 $sort = 'sort';
 
