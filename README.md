@@ -374,16 +374,7 @@ $result = $advocates->getAdvocates($accountSlug, $page, $limit, $filter, $sort);
 
 
 ```php
-function patchAdvocate(
-        $accountSlug,
-        $advocateToken,
-        $name = null,
-        $lastname = null,
-        $email = null,
-        $payoutThreshold = null,
-        $metadata = null,
-        $canRefer = null,
-        $currencyCode = null)
+function patchAdvocate($options)
 ```
 
 #### Parameters
@@ -406,16 +397,34 @@ function patchAdvocate(
 
 ```php
 $accountSlug = 'account_slug';
-$advocateToken = 'advocate_token';
-$name = 'name';
-$lastname = 'lastname';
-$email = 'email';
-$payoutThreshold = 106;
-$metadata = 'metadata';
-$canRefer = false;
-$currencyCode = 'currency_code';
+$collect['accountSlug'] = $accountSlug;
 
-$result = $advocates->patchAdvocate($accountSlug, $advocateToken, $name, $lastname, $email, $payoutThreshold, $metadata, $canRefer, $currencyCode);
+$advocateToken = 'advocate_token';
+$collect['advocateToken'] = $advocateToken;
+
+$name = 'name';
+$collect['name'] = $name;
+
+$lastname = 'lastname';
+$collect['lastname'] = $lastname;
+
+$email = 'email';
+$collect['email'] = $email;
+
+$payoutThreshold = 13;
+$collect['payoutThreshold'] = $payoutThreshold;
+
+$metadata = 'metadata';
+$collect['metadata'] = $metadata;
+
+$canRefer = false;
+$collect['canRefer'] = $canRefer;
+
+$currencyCode = 'currency_code';
+$collect['currencyCode'] = $currencyCode;
+
+
+$result = $advocates->patchAdvocate($collect);
 
 ```
 
@@ -486,8 +495,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 106;
-$limit = 106;
+$page = 13;
+$limit = 13;
 $filter = 'filter';
 $sort = 'sort';
 

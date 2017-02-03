@@ -421,31 +421,24 @@ class AdvocatesController extends BaseController
     /**
      * Update partial elements of an advocate.
      *
-     * @param string  $accountSlug      The account identifier
-     * @param string  $advocateToken    The advocate's token
-     * @param string  $name             (optional) The advocate's name
-     * @param string  $lastname         (optional) The advocate's last name
-     * @param string  $email            (optional) The advocate's email
-     * @param integer $payoutThreshold  (optional) The total amount of bonuses that the advocate must generate before
-     *                                  being able to create a bonus redemption request.
-     * @param string  $metadata         (optional) Useful to store extra information about the advocate. e.g, the phone
-     *                                  number, address, etc.
-     * @param bool    $canRefer         (optional) Whether or not the advocate is allowed to refer services/products
-     *                                  (Useful when using the Full Widget template).
-     * @param string  $currencyCode     (optional) The currency code
+     * @param  array  $options    Array with all options for search
+     * @param string  $options['accountSlug']      The account identifier
+     * @param string  $options['advocateToken']    The advocate's token
+     * @param string  $options['name']             (optional) The advocate's name
+     * @param string  $options['lastname']         (optional) The advocate's last name
+     * @param string  $options['email']            (optional) The advocate's email
+     * @param integer $options['payoutThreshold']  (optional) The total amount of bonuses that the advocate must
+     *                                             generate before being able to create a bonus redemption request.
+     * @param string  $options['metadata']         (optional) Useful to store extra information about the advocate. e.g,
+     *                                             the phone number, address, etc.
+     * @param bool    $options['canRefer']         (optional) Whether or not the advocate is allowed to refer
+     *                                             services/products (Useful when using the Full Widget template).
+     * @param string  $options['currencyCode']     (optional) The currency code
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function patchAdvocate(
-        $accountSlug,
-        $advocateToken,
-        $name = null,
-        $lastname = null,
-        $email = null,
-        $payoutThreshold = null,
-        $metadata = null,
-        $canRefer = null,
-        $currencyCode = null
+        $options
     ) {
 
         //the base uri for api requests
@@ -456,14 +449,14 @@ class AdvocatesController extends BaseController
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'account_slug'     => $accountSlug,
-            'advocate_token'   => $advocateToken,
-            'name'             => $name,
-            'lastname'         => $lastname,
-            'email'            => $email,
-            'payout_threshold' => $payoutThreshold,
-            'metadata'         => $metadata,
-            'can_refer'        => var_export($canRefer, true),
+            'account_slug'     => $this->val($options, 'accountSlug'),
+            'advocate_token'   => $this->val($options, 'advocateToken'),
+            'name'             => $this->val($options, 'name'),
+            'lastname'         => $this->val($options, 'lastname'),
+            'email'            => $this->val($options, 'email'),
+            'payout_threshold' => $this->val($options, 'payoutThreshold'),
+            'metadata'         => $this->val($options, 'metadata'),
+            'can_refer'        => $this->val($options, 'canRefer'),
             ));
 
         //validate and preprocess url
@@ -484,7 +477,7 @@ class AdvocatesController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::patch($_queryUrl, $_headers, $currencyCode);
+        $response = Request::patch($_queryUrl, $_headers, $this->val($options, 'currency_code'));
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
@@ -498,5 +491,21 @@ class AdvocatesController extends BaseController
         $this->validateResponse($_httpResponse, $_httpContext);
 
         return $response->body;
+    }
+
+
+    /**
+    * Array access utility method
+     * @param  array          $arr         Array of values to read from
+     * @param  string         $key         Key to get the value from the array
+     * @param  mixed|null     $default     Default value to use if the key was not found
+     * @return mixed
+     */
+    private function val($arr, $key, $default = null)
+    {
+        if (isset($arr[$key])) {
+            return is_bool($arr[$key]) ? var_export($arr[$key], true) : $arr[$key];
+        }
+        return $default;
     }
 }
