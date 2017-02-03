@@ -106,7 +106,7 @@ class AdvocatesController extends BaseController
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function updateAdvocate(
+    public function putAdvocate(
         $accountSlug,
         $advocateToken,
         $advocateForm

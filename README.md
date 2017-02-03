@@ -205,13 +205,13 @@ $advocates->deleteAdvocate($accountSlug, $advocateToken);
 ```
 
 
-#### <a name="update_advocate"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.updateAdvocate") updateAdvocate
+#### <a name="put_advocate"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.putAdvocate") putAdvocate
 
 > Update an advocate.
 
 
 ```php
-function updateAdvocate(
+function putAdvocate(
         $accountSlug,
         $advocateToken,
         $advocateForm)
@@ -234,7 +234,7 @@ $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $advocateForm = new AdvocateForm();
 
-$result = $advocates->updateAdvocate($accountSlug, $advocateToken, $advocateForm);
+$result = $advocates->putAdvocate($accountSlug, $advocateToken, $advocateForm);
 
 ```
 
@@ -465,8 +465,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 196;
-$limit = 196;
+$page = 178;
+$limit = 178;
 $filter = 'filter';
 $sort = 'sort';
 
