@@ -423,7 +423,7 @@ class AdvocatesController extends BaseController
      *
      * @param string $accountSlug         The account identifier
      * @param string $advocateToken       The advocate's token
-     * @param array  $advocatePatchForm   test
+     * @param array  $advocatePatchForm   The body of the request
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */

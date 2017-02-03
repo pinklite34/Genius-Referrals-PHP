@@ -386,7 +386,7 @@ function patchAdvocate(
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
 | advocateToken |  ``` Required ```  | The advocate's token |
-| advocatePatchForm |  ``` Required ```  ``` Collection ```  | test |
+| advocatePatchForm |  ``` Required ```  ``` Collection ```  | The body of the request |
 
 
 
@@ -469,8 +469,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 169;
-$limit = 169;
+$page = 204;
+$limit = 204;
 $filter = 'filter';
 $sort = 'sort';
 

@@ -16,7 +16,7 @@ class AdvocatePatchForm implements JsonSerializable
 {
     /**
      * The advocate's name
-     * @var string $name public property
+     * @var array $name public property
      */
     public $name;
 
@@ -82,7 +82,7 @@ class AdvocatePatchForm implements JsonSerializable
 
     /**
      * Constructor to set initial or default values of member properties
-     * @param string  $name             Initialization value for $this->name
+     * @param array   $name             Initialization value for $this->name
      * @param string  $lastname         Initialization value for $this->lastname
      * @param string  $email            Initialization value for $this->email
      * @param integer $payoutThreshold  Initialization value for $this->payoutThreshold
