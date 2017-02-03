@@ -423,6 +423,7 @@ class AdvocatesController extends BaseController
      *
      * @param string $accountSlug    The account identifier
      * @param string $advocateToken  The advocate's token
+     * @param string $test           (optional) test
      * @param    array  $fieldParameters    Additional optional form parameters are supported by this endpoint
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
@@ -430,6 +431,7 @@ class AdvocatesController extends BaseController
     public function patchAdvocate(
         $accountSlug,
         $advocateToken,
+        $test = null,
         $fieldParameters = null
     ) {
 
@@ -443,6 +445,7 @@ class AdvocatesController extends BaseController
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
             'account_slug'   => $accountSlug,
             'advocate_token' => $advocateToken,
+            'test'           => $test,
             ));
 
         //validate and preprocess url
