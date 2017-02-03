@@ -374,7 +374,10 @@ $result = $advocates->getAdvocates($accountSlug, $page, $limit, $filter, $sort);
 
 
 ```php
-function patchAdvocate($options)
+function patchAdvocate(
+        $accountSlug,
+        $advocateToken,
+        $fieldParameters = null)
 ```
 
 #### Parameters
@@ -383,13 +386,7 @@ function patchAdvocate($options)
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
 | advocateToken |  ``` Required ```  | The advocate's token |
-| name |  ``` Optional ```  | The advocate's name |
-| lastname |  ``` Optional ```  | The advocate's last name |
-| email |  ``` Optional ```  | The advocate's email |
-| payoutThreshold |  ``` Optional ```  | The total amount of bonuses that the advocate must generate before being able to create a bonus redemption request. |
-| metadata |  ``` Optional ```  | Useful to store extra information about the advocate. e.g, the phone number, address, etc. |
-| canRefer |  ``` Optional ```  | Whether or not the advocate is allowed to refer services/products (Useful when using the Full Widget template). |
-| currencyCode |  ``` Optional ```  | The currency code |
+| fieldParameters | ``` Optional ``` | Additional optional form parameters are supported by this method |
 
 
 
@@ -397,34 +394,12 @@ function patchAdvocate($options)
 
 ```php
 $accountSlug = 'account_slug';
-$collect['accountSlug'] = $accountSlug;
-
 $advocateToken = 'advocate_token';
-$collect['advocateToken'] = $advocateToken;
-
-$name = 'name';
-$collect['name'] = $name;
-
-$lastname = 'lastname';
-$collect['lastname'] = $lastname;
-
-$email = 'email';
-$collect['email'] = $email;
-
-$payoutThreshold = 13;
-$collect['payoutThreshold'] = $payoutThreshold;
-
-$metadata = 'metadata';
-$collect['metadata'] = $metadata;
-
-$canRefer = false;
-$collect['canRefer'] = $canRefer;
-
-$currencyCode = 'currency_code';
-$collect['currencyCode'] = $currencyCode;
+// key-value map for optional form parameters
+$formParams = array('key' => 'value');
 
 
-$result = $advocates->patchAdvocate($collect);
+$result = $advocates->patchAdvocate($accountSlug, $advocateToken, $formParams);
 
 ```
 
@@ -495,8 +470,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 13;
-$limit = 13;
+$page = 30;
+$limit = 30;
 $filter = 'filter';
 $sort = 'sort';
 
