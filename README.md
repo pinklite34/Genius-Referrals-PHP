@@ -465,8 +465,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 203;
-$limit = 203;
+$page = 196;
+$limit = 196;
 $filter = 'filter';
 $sort = 'sort';
 

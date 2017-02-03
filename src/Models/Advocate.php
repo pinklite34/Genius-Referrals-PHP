@@ -75,14 +75,20 @@ class Advocate implements JsonSerializable
      */
     public function __construct()
     {
-        if (7 == func_num_args()) {
-            $this->name            = func_get_arg(0);
-            $this->lastname        = func_get_arg(1);
-            $this->email           = func_get_arg(2);
-            $this->payoutThreshold = func_get_arg(3);
-            $this->avatarUrl       = func_get_arg(4);
-            $this->metadata        = func_get_arg(5);
-            $this->canRefer        = func_get_arg(6);
+        switch (func_num_args()) {
+            case 7:
+                $this->name            = func_get_arg(0);
+                $this->lastname        = func_get_arg(1);
+                $this->email           = func_get_arg(2);
+                $this->payoutThreshold = func_get_arg(3);
+                $this->avatarUrl       = func_get_arg(4);
+                $this->metadata        = func_get_arg(5);
+                $this->canRefer        = func_get_arg(6);
+                break;
+
+            default:
+                $this->canRefer = TRUE;
+                break;
         }
     }
 
