@@ -377,7 +377,7 @@ $result = $advocates->getAdvocates($accountSlug, $page, $limit, $filter, $sort);
 function patchAdvocate(
         $accountSlug,
         $advocateToken,
-        $test)
+        $advocatePatchForm)
 ```
 
 #### Parameters
@@ -386,7 +386,7 @@ function patchAdvocate(
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
 | advocateToken |  ``` Required ```  | The advocate's token |
-| test |  ``` Required ```  ``` Collection ```  | test |
+| advocatePatchForm |  ``` Required ```  ``` Collection ```  | test |
 
 
 
@@ -396,9 +396,9 @@ function patchAdvocate(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $advocatePatchForm = new AdvocatePatchForm();
-$test = array($advocatePatchForm);
+$advocatePatchForm = array($advocatePatchForm);
 
-$result = $advocates->patchAdvocate($accountSlug, $advocateToken, $test);
+$result = $advocates->patchAdvocate($accountSlug, $advocateToken, $advocatePatchForm);
 
 ```
 
@@ -469,8 +469,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 89;
-$limit = 89;
+$page = 169;
+$limit = 169;
 $filter = 'filter';
 $sort = 'sort';
 

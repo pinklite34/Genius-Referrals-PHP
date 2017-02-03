@@ -421,16 +421,16 @@ class AdvocatesController extends BaseController
     /**
      * Update partial elements of an advocate.
      *
-     * @param string $accountSlug    The account identifier
-     * @param string $advocateToken  The advocate's token
-     * @param array  $test           test
+     * @param string $accountSlug         The account identifier
+     * @param string $advocateToken       The advocate's token
+     * @param array  $advocatePatchForm   test
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function patchAdvocate(
         $accountSlug,
         $advocateToken,
-        $test
+        $advocatePatchForm
     ) {
 
         //the base uri for api requests
@@ -441,8 +441,8 @@ class AdvocatesController extends BaseController
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'account_slug'   => $accountSlug,
-            'advocate_token' => $advocateToken,
+            'account_slug'        => $accountSlug,
+            'advocate_token'      => $advocateToken,
             ));
 
         //validate and preprocess url
@@ -450,9 +450,9 @@ class AdvocatesController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'APIMATIC 2.0',
-            'Accept'        => 'application/json',
-            'content-type'  => 'application/json; charset=utf-8',
+            'user-agent'        => 'APIMATIC 2.0',
+            'Accept'            => 'application/json',
+            'content-type'      => 'application/json; charset=utf-8',
             'Content-Type' => Configuration::$contentType,
             'X-Auth-Token' => Configuration::$xAuthToken
         );
@@ -464,7 +464,7 @@ class AdvocatesController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::patch($_queryUrl, $_headers, Request\Body::Json($test));
+        $response = Request::patch($_queryUrl, $_headers, Request\Body::Json($advocatePatchForm));
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
