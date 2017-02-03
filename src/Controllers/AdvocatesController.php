@@ -160,65 +160,6 @@ class AdvocatesController extends BaseController
     }
 
     /**
-     * Update partial elements of an advocate.
-     *
-     * @param string $accountSlug    The account identifier
-     * @param string $advocateToken  The advocate's token
-     * @return mixed response from the API call
-     * @throws APIException Thrown if API call fails
-     */
-    public function patchAdvocate(
-        $accountSlug,
-        $advocateToken
-    ) {
-
-        //the base uri for api requests
-        $_queryBuilder = Configuration::$BASEURI;
-        
-        //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/advocates/{advocate_token}';
-
-        //process optional query parameters
-        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'account_slug'   => $accountSlug,
-            'advocate_token' => $advocateToken,
-            ));
-
-        //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
-
-        //prepare headers
-        $_headers = array (
-            'user-agent'    => 'APIMATIC 2.0',
-            'Accept'        => 'application/json',
-            'Content-Type' => Configuration::$contentType,
-            'X-Auth-Token' => Configuration::$xAuthToken
-        );
-
-        //call on-before Http callback
-        $_httpRequest = new HttpRequest(HttpMethod::PATCH, $_headers, $_queryUrl);
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
-        }
-
-        //and invoke the API call request to fetch the response
-        $response = Request::patch($_queryUrl, $_headers);
-
-        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
-        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
-
-        //call on-after Http callback
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
-        }
-
-        //handle errors defined at the API level
-        $this->validateResponse($_httpResponse, $_httpContext);
-
-        return $response->body;
-    }
-
-    /**
      * Create a new advocate.
      *
      * @param string              $accountSlug   The account identifier
@@ -462,6 +403,88 @@ class AdvocatesController extends BaseController
 
         //and invoke the API call request to fetch the response
         $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Update partial elements of an advocate.
+     *
+     * @param string  $accountSlug      The account identifier
+     * @param string  $advocateToken    The advocate's token
+     * @param string  $name             (optional) The advocate's name
+     * @param string  $lastname         (optional) The advocate's last name
+     * @param string  $email            (optional) The advocate's email
+     * @param integer $payoutThreshold  (optional) The total amount of bonuses that the advocate must generate before
+     *                                  being able to create a bonus redemption request.
+     * @param string  $metadata         (optional) Useful to store extra information about the advocate. e.g, the phone
+     *                                  number, address, etc.
+     * @param bool    $canRefer         (optional) Whether or not the advocate is allowed to refer services/products
+     *                                  (Useful when using the Full Widget template).
+     * @param string  $currencyCode     (optional) The currency code
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function patchAdvocate(
+        $accountSlug,
+        $advocateToken,
+        $name = null,
+        $lastname = null,
+        $email = null,
+        $payoutThreshold = null,
+        $metadata = null,
+        $canRefer = null,
+        $currencyCode = null
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/advocates/{advocate_token}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'     => $accountSlug,
+            'advocate_token'   => $advocateToken,
+            'name'             => $name,
+            'lastname'         => $lastname,
+            'email'            => $email,
+            'payout_threshold' => $payoutThreshold,
+            'metadata'         => $metadata,
+            'can_refer'        => var_export($canRefer, true),
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'     => 'APIMATIC 2.0',
+            'Accept'         => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::PATCH, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::patch($_queryUrl, $_headers, $currencyCode);
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);

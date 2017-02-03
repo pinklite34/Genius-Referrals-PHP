@@ -239,37 +239,6 @@ $result = $advocates->putAdvocate($accountSlug, $advocateToken, $advocateForm);
 ```
 
 
-#### <a name="patch_advocate"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.patchAdvocate") patchAdvocate
-
-> Update partial elements of an advocate.
-
-
-```php
-function patchAdvocate(
-        $accountSlug,
-        $advocateToken)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| accountSlug |  ``` Required ```  | The account identifier |
-| advocateToken |  ``` Required ```  | The advocate's token |
-
-
-
-#### Example Usage
-
-```php
-$accountSlug = 'account_slug';
-$advocateToken = 'advocate_token';
-
-$result = $advocates->patchAdvocate($accountSlug, $advocateToken);
-
-```
-
-
 #### <a name="post_advocate"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.postAdvocate") postAdvocate
 
 > Create a new advocate.
@@ -399,6 +368,58 @@ $result = $advocates->getAdvocates($accountSlug, $page, $limit, $filter, $sort);
 ```
 
 
+#### <a name="patch_advocate"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.patchAdvocate") patchAdvocate
+
+> Update partial elements of an advocate.
+
+
+```php
+function patchAdvocate(
+        $accountSlug,
+        $advocateToken,
+        $name = null,
+        $lastname = null,
+        $email = null,
+        $payoutThreshold = null,
+        $metadata = null,
+        $canRefer = null,
+        $currencyCode = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| name |  ``` Optional ```  | The advocate's name |
+| lastname |  ``` Optional ```  | The advocate's last name |
+| email |  ``` Optional ```  | The advocate's email |
+| payoutThreshold |  ``` Optional ```  | The total amount of bonuses that the advocate must generate before being able to create a bonus redemption request. |
+| metadata |  ``` Optional ```  | Useful to store extra information about the advocate. e.g, the phone number, address, etc. |
+| canRefer |  ``` Optional ```  | Whether or not the advocate is allowed to refer services/products (Useful when using the Full Widget template). |
+| currencyCode |  ``` Optional ```  | The currency code |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$name = 'name';
+$lastname = 'lastname';
+$email = 'email';
+$payoutThreshold = 30;
+$metadata = 'metadata';
+$canRefer = false;
+$currencyCode = 'currency_code';
+
+$result = $advocates->patchAdvocate($accountSlug, $advocateToken, $name, $lastname, $email, $payoutThreshold, $metadata, $canRefer, $currencyCode);
+
+```
+
+
 [Back to List of Controllers](#list_of_controllers)
 
 ### <a name="accounts_controller"></a>![Class: ](https://apidocs.io/img/class.png ".AccountsController") AccountsController
@@ -465,8 +486,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 242;
-$limit = 242;
+$page = 243;
+$limit = 243;
 $filter = 'filter';
 $sort = 'sort';
 
