@@ -42,26 +42,75 @@ class RedemptionRequestsController extends BaseController
     }
 
     /**
-     * Create a redemption request.
+     * Get a redemption request status.
      *
-     * @param string $accountSlug  The account identifier
+     * @param string $redemptionRequestStatusSlug    The redemption request status identifier
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function postRedemptionRequest(
-        $accountSlug
+    public function getRedemptionRequestStatus(
+        $redemptionRequestStatusSlug
     ) {
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
         
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/redemption-requests';
+        $_queryBuilder = $_queryBuilder.'/utilities/redemption-request-statuses/{redemption_request_status_slug}';
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'account_slug' => $accountSlug,
+            'redemption_request_status_slug' => $redemptionRequestStatusSlug,
             ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'                   => 'APIMATIC 2.0',
+            'Accept'                       => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get redemption request statuses.
+     *
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getRedemptionRequestStatuses()
+    {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/utilities/redemption-request-statuses';
 
         //validate and preprocess url
         $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
@@ -75,13 +124,293 @@ class RedemptionRequestsController extends BaseController
         );
 
         //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get a redemption request action.
+     *
+     * @param string $redemptionRequestActionSlug    The redemption request action identifier
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getRedemptionRequestActions(
+        $redemptionRequestActionSlug
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/utilities/redemption-request-actions/{redemption_request_action_slug}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'redemption_request_action_slug' => $redemptionRequestActionSlug,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'                   => 'APIMATIC 2.0',
+            'Accept'                       => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get redemption request actions.
+     *
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getRedemptionRequestActions()
+    {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/utilities/redemption-request-actions';
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'APIMATIC 2.0',
+            'Accept'        => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Redeem a redemption request. After the redemption request is created it needs to be redeemed. This
+     * will deduct the amount of the advocate unclaimed balance and move the request to the completed state.
+     *
+     * @param string  $accountSlug           The account identifier
+     * @param integer $redemptionRequestId   The redemption request id
+     * @return void response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function patchRedemptionRequest(
+        $accountSlug,
+        $redemptionRequestId
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/redemption-requests/{redemption_request_id}/redemption';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'          => $accountSlug,
+            'redemption_request_id' => $redemptionRequestId,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'          => 'APIMATIC 2.0',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::PATCH, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::patch($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+    }
+
+    /**
+     * Create a redemption request.
+     *
+     * @param string                       $accountSlug             The account identifier
+     * @param Models\RedemptionRequestForm $redemptionRequestForm   The body of the request
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function postRedemptionRequest(
+        $accountSlug,
+        $redemptionRequestForm
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/redemption-requests';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'            => $accountSlug,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'            => 'APIMATIC 2.0',
+            'Accept'                => 'application/json',
+            'content-type'          => 'application/json; charset=utf-8',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
         $_httpRequest = new HttpRequest(HttpMethod::POST, $_headers, $_queryUrl);
         if ($this->getHttpCallBack() != null) {
             $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers);
+        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($redemptionRequestForm));
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get a redemption request by a given id.
+     *
+     * @param string $accountSlug           The account identifier
+     * @param string $redemptionRequestId   The redemption request identifier
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getRedemptionRequest(
+        $accountSlug,
+        $redemptionRequestId
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/redemption-requests/{redemption_request_id}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'          => $accountSlug,
+            'redemption_request_id' => $redemptionRequestId,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'          => 'APIMATIC 2.0',
+            'Accept'              => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);

@@ -503,8 +503,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 138;
-$limit = 138;
+$page = 3;
+$limit = 3;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -525,13 +525,105 @@ The singleton instance of the ``` RedemptionRequestsController ``` class can be 
 $redemptionRequests = $client->getRedemptionRequests();
 ```
 
-#### <a name="post_redemption_request"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.postRedemptionRequest") postRedemptionRequest
+#### <a name="get_redemption_request_status"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.getRedemptionRequestStatus") getRedemptionRequestStatus
 
-> Create a redemption request.
+> Get a redemption request status.
 
 
 ```php
-function postRedemptionRequest($accountSlug)
+function getRedemptionRequestStatus($redemptionRequestStatusSlug)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| redemptionRequestStatusSlug |  ``` Required ```  | The redemption request status identifier |
+
+
+
+#### Example Usage
+
+```php
+$redemptionRequestStatusSlug = 'redemption_request_status_slug';
+
+$result = $redemptionRequests->getRedemptionRequestStatus($redemptionRequestStatusSlug);
+
+```
+
+
+#### <a name="get_redemption_request_statuses"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.getRedemptionRequestStatuses") getRedemptionRequestStatuses
+
+> Get redemption request statuses.
+
+
+```php
+function getRedemptionRequestStatuses()
+```
+
+#### Example Usage
+
+```php
+
+$result = $redemptionRequests->getRedemptionRequestStatuses();
+
+```
+
+
+#### <a name="get_redemption_request_actions"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.getRedemptionRequestActions") getRedemptionRequestActions
+
+> Get a redemption request action.
+
+
+```php
+function getRedemptionRequestActions($redemptionRequestActionSlug)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| redemptionRequestActionSlug |  ``` Required ```  | The redemption request action identifier |
+
+
+
+#### Example Usage
+
+```php
+$redemptionRequestActionSlug = 'redemption_request_action_slug';
+
+$result = $redemptionRequests->getRedemptionRequestActions($redemptionRequestActionSlug);
+
+```
+
+
+#### <a name="get_redemption_request_actions"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.getRedemptionRequestActions") getRedemptionRequestActions
+
+> Get redemption request actions.
+
+
+```php
+function getRedemptionRequestActions()
+```
+
+#### Example Usage
+
+```php
+
+$result = $redemptionRequests->getRedemptionRequestActions();
+
+```
+
+
+#### <a name="patch_redemption_request"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.patchRedemptionRequest") patchRedemptionRequest
+
+> Redeem a redemption request. After the redemption request is created it needs to be redeemed. This will deduct the amount of the advocate unclaimed balance and move the request to the completed state.
+
+
+```php
+function patchRedemptionRequest(
+        $accountSlug,
+        $redemptionRequestId)
 ```
 
 #### Parameters
@@ -539,6 +631,7 @@ function postRedemptionRequest($accountSlug)
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
+| redemptionRequestId |  ``` Required ```  | The redemption request id |
 
 
 
@@ -546,8 +639,71 @@ function postRedemptionRequest($accountSlug)
 
 ```php
 $accountSlug = 'account_slug';
+$redemptionRequestId = 3;
 
-$result = $redemptionRequests->postRedemptionRequest($accountSlug);
+$redemptionRequests->patchRedemptionRequest($accountSlug, $redemptionRequestId);
+
+```
+
+
+#### <a name="post_redemption_request"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.postRedemptionRequest") postRedemptionRequest
+
+> Create a redemption request.
+
+
+```php
+function postRedemptionRequest(
+        $accountSlug,
+        $redemptionRequestForm)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| redemptionRequestForm |  ``` Required ```  | The body of the request |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$redemptionRequestForm = new RedemptionRequestForm();
+
+$result = $redemptionRequests->postRedemptionRequest($accountSlug, $redemptionRequestForm);
+
+```
+
+
+#### <a name="get_redemption_request"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.getRedemptionRequest") getRedemptionRequest
+
+> Get a redemption request by a given id.
+
+
+```php
+function getRedemptionRequest(
+        $accountSlug,
+        $redemptionRequestId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| redemptionRequestId |  ``` Required ```  | The redemption request identifier |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$redemptionRequestId = 'redemption_request_id';
+
+$result = $redemptionRequests->getRedemptionRequest($accountSlug, $redemptionRequestId);
 
 ```
 
@@ -634,8 +790,8 @@ function getBonuses(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 138;
-$limit = 138;
+$page = 217;
+$limit = 217;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -705,7 +861,7 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 138.445276407732;
+$paymentAmount = 217.252634541249;
 
 $result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -767,7 +923,7 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 138;
+$traceId = 217;
 
 $result = $bonuses->getBonusesTrace($accountSlug, $traceId);
 
@@ -798,7 +954,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 24;
+$bonusId = 217;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -829,7 +985,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 24;
+$bonusId = 217;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
@@ -866,8 +1022,8 @@ function getBonusesTraces(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 24;
-$limit = 24;
+$page = 217;
+$limit = 217;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -949,8 +1105,8 @@ function getCampaigns(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 24;
-$limit = 24;
+$page = 217;
+$limit = 217;
 $filter = 'filter';
 $sort = 'sort';
 
