@@ -134,6 +134,7 @@ $client = new GeniusReferralsLib\GeniusReferralsClient($contentType, $xAuthToken
 * [AuthenticationsController](#authentications_controller)
 * [AdvocatesController](#advocates_controller)
 * [AccountsController](#accounts_controller)
+* [ReportsController](#reports_controller)
 * [ReferralsController](#referrals_controller)
 * [RedemptionRequestsController](#redemption_requests_controller)
 * [BonusesController](#bonuses_controller)
@@ -504,12 +505,278 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 213;
-$limit = 213;
+$page = 5;
+$limit = 5;
 $filter = 'filter';
 $sort = 'sort';
 
 $result = $accounts->getAccounts($page, $limit, $filter, $sort);
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+### <a name="reports_controller"></a>![Class: ](https://apidocs.io/img/class.png ".ReportsController") ReportsController
+
+#### Get singleton instance
+
+The singleton instance of the ``` ReportsController ``` class can be accessed from the API Client.
+
+```php
+$reports = $client->getReports();
+```
+
+#### <a name="get_referrals_summary_per_origin"></a>![Method: ](https://apidocs.io/img/method.png ".ReportsController.getReferralsSummaryPerOrigin") getReferralsSummaryPerOrigin
+
+> Get referrals summary per referral origin.
+
+
+```php
+function getReferralsSummaryPerOrigin($advocateToken)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| advocateToken |  ``` Required ```  | The advocate's token |
+
+
+
+#### Example Usage
+
+```php
+$advocateToken = 'advocate_token';
+
+$result = $reports->getReferralsSummaryPerOrigin($advocateToken);
+
+```
+
+
+#### <a name="get_bonuses_summary_per_origin"></a>![Method: ](https://apidocs.io/img/method.png ".ReportsController.getBonusesSummaryPerOrigin") getBonusesSummaryPerOrigin
+
+> Get bonuses summary per referral origin.
+
+
+```php
+function getBonusesSummaryPerOrigin($advocateToken)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| advocateToken |  ``` Required ```  | The advocate's token |
+
+
+
+#### Example Usage
+
+```php
+$advocateToken = 'advocate_token';
+
+$result = $reports->getBonusesSummaryPerOrigin($advocateToken);
+
+```
+
+
+#### <a name="get_top_advocates"></a>![Method: ](https://apidocs.io/img/method.png ".ReportsController.getTopAdvocates") getTopAdvocates
+
+> Get top 10 advocates.
+
+
+```php
+function getTopAdvocates(
+        $accountSlug = null,
+        $campaignSlug = null,
+        $limit = null,
+        $from = null,
+        $to = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Optional ```  | The account identifier |
+| campaignSlug |  ``` Optional ```  | The campaign identifier |
+| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10) |
+| from |  ``` Optional ```  | The datetime were the range of the search starts |
+| to |  ``` Optional ```  | The datetime were the range of the search stops |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$campaignSlug = 'campaign_slug';
+$limit = 5;
+$from = date("D M d, Y G:i");
+$to = date("D M d, Y G:i");
+
+$result = $reports->getTopAdvocates($accountSlug, $campaignSlug, $limit, $from, $to);
+
+```
+
+
+#### <a name="get_share_daily_participation"></a>![Method: ](https://apidocs.io/img/method.png ".ReportsController.getShareDailyParticipation") getShareDailyParticipation
+
+> Get share daily participation.
+
+
+```php
+function getShareDailyParticipation(
+        $accountSlug = null,
+        $campaignSlug = null,
+        $advocateToken = null,
+        $from = null,
+        $to = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Optional ```  | The account identifier |
+| campaignSlug |  ``` Optional ```  | The campaign identifier |
+| advocateToken |  ``` Optional ```  | The advocate's token |
+| from |  ``` Optional ```  | The datetime were the range of the search starts |
+| to |  ``` Optional ```  | The datetime were the range of the search stops |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$campaignSlug = 'campaign_slug';
+$advocateToken = 'advocate_token';
+$from = date("D M d, Y G:i");
+$to = date("D M d, Y G:i");
+
+$result = $reports->getShareDailyParticipation($accountSlug, $campaignSlug, $advocateToken, $from, $to);
+
+```
+
+
+#### <a name="get_referral_daily_participation"></a>![Method: ](https://apidocs.io/img/method.png ".ReportsController.getReferralDailyParticipation") getReferralDailyParticipation
+
+> Get referral daily participation.
+
+
+```php
+function getReferralDailyParticipation(
+        $accountSlug = null,
+        $campaignSlug = null,
+        $advocateToken = null,
+        $from = null,
+        $to = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Optional ```  | The account identifier |
+| campaignSlug |  ``` Optional ```  | The campaign identifier |
+| advocateToken |  ``` Optional ```  | The advocate's token |
+| from |  ``` Optional ```  | The datetime were the range of the search starts |
+| to |  ``` Optional ```  | The datetime were the range of the search stops |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$campaignSlug = 'campaign_slug';
+$advocateToken = 'advocate_token';
+$from = date("D M d, Y G:i");
+$to = date("D M d, Y G:i");
+
+$result = $reports->getReferralDailyParticipation($accountSlug, $campaignSlug, $advocateToken, $from, $to);
+
+```
+
+
+#### <a name="get_click_daily_participation"></a>![Method: ](https://apidocs.io/img/method.png ".ReportsController.getClickDailyParticipation") getClickDailyParticipation
+
+> Get click daily participation.
+
+
+```php
+function getClickDailyParticipation(
+        $accountSlug = null,
+        $campaignSlug = null,
+        $advocateToken = null,
+        $from = null,
+        $to = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Optional ```  | The account identifier |
+| campaignSlug |  ``` Optional ```  | The campaign identifier |
+| advocateToken |  ``` Optional ```  | The advocate's token |
+| from |  ``` Optional ```  | The datetime were the range of the search starts |
+| to |  ``` Optional ```  | The datetime were the range of the search stops |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$campaignSlug = 'campaign_slug';
+$advocateToken = 'advocate_token';
+$from = date("D M d, Y G:i");
+$to = date("D M d, Y G:i");
+
+$result = $reports->getClickDailyParticipation($accountSlug, $campaignSlug, $advocateToken, $from, $to);
+
+```
+
+
+#### <a name="get_bonuses_daily_given"></a>![Method: ](https://apidocs.io/img/method.png ".ReportsController.getBonusesDailyGiven") getBonusesDailyGiven
+
+> Get bonuses daily given.
+
+
+```php
+function getBonusesDailyGiven(
+        $accountSlug = null,
+        $campaignSlug = null,
+        $advocateToken = null,
+        $from = null,
+        $to = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Optional ```  | The account identifier |
+| campaignSlug |  ``` Optional ```  | The campaign identifier |
+| advocateToken |  ``` Optional ```  | The advocate identifier |
+| from |  ``` Optional ```  | The datetime were the range of the search starts |
+| to |  ``` Optional ```  | The datetime were the range of the search stops |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$campaignSlug = 'campaign_slug';
+$advocateToken = 'advocate_token';
+$from = date("D M d, Y G:i");
+$to = date("D M d, Y G:i");
+
+$result = $reports->getBonusesDailyGiven($accountSlug, $campaignSlug, $advocateToken, $from, $to);
 
 ```
 
@@ -743,8 +1010,8 @@ function getReferrals(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$page = 213;
-$limit = 213;
+$page = 5;
+$limit = 5;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -879,7 +1146,7 @@ function patchRedemptionRequest(
 
 ```php
 $accountSlug = 'account_slug';
-$redemptionRequestId = 213;
+$redemptionRequestId = 5;
 
 $redemptionRequests->patchRedemptionRequest($accountSlug, $redemptionRequestId);
 
@@ -1030,8 +1297,8 @@ function getBonuses(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 141;
-$limit = 141;
+$page = 219;
+$limit = 219;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1101,7 +1368,7 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 141.9217787366;
+$paymentAmount = 219.181980420454;
 
 $result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -1163,7 +1430,7 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 141;
+$traceId = 219;
 
 $result = $bonuses->getBonusesTrace($accountSlug, $traceId);
 
@@ -1194,7 +1461,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 141;
+$bonusId = 219;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -1225,7 +1492,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 141;
+$bonusId = 219;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
@@ -1262,8 +1529,8 @@ function getBonusesTraces(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 141;
-$limit = 141;
+$page = 219;
+$limit = 219;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1345,8 +1612,8 @@ function getCampaigns(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 141;
-$limit = 141;
+$page = 219;
+$limit = 219;
 $filter = 'filter';
 $sort = 'sort';
 
