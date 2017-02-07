@@ -502,8 +502,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 155;
-$limit = 155;
+$page = 229;
+$limit = 229;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -554,8 +554,8 @@ function getBonuses(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 155;
-$limit = 155;
+$page = 229;
+$limit = 229;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -625,7 +625,7 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 155.240230211169;
+$paymentAmount = 229.425676427514;
 
 $result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -687,7 +687,7 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 155;
+$traceId = 187;
 
 $result = $bonuses->getBonusesTrace($accountSlug, $traceId);
 
@@ -718,7 +718,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 155;
+$bonusId = 187;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -749,7 +749,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 155;
+$bonusId = 187;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
@@ -786,8 +786,8 @@ function getBonusesTraces(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 113;
-$limit = 113;
+$page = 187;
+$limit = 187;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -869,8 +869,8 @@ function getCampaigns(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 113;
-$limit = 113;
+$page = 187;
+$limit = 187;
 $filter = 'filter';
 $sort = 'sort';
 
