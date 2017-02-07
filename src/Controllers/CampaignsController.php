@@ -106,7 +106,7 @@ class CampaignsController extends BaseController
      * @param integer $limit        (optional) Maximum number of results to return in the response. Default (10),
      *                              threshold (100)
      * @param string  $filter       (optional) Allowed fields: name, description, start_date, end_date, is_active
-     *                              (true|false), created. Use the following delimiters to build your filters params.
+     *                              (true\|false), created. Use the following delimiters to build your filters params.
      *                              The vertical bar ('\|') to separate individual filter phrases and a double colon (':
      *                              :') to separate the names and values. The delimiter of the double colon (':')
      *                              separates the property name from the comparison value, enabling the comparison

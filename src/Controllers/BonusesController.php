@@ -129,18 +129,19 @@ class BonusesController extends BaseController
     }
 
     /**
-     * Create a new bonus for a given advocate token. The system processes the advocate and creates a bonus
-     * for the advocate's referrer if is needed. All restrictions set on the campaigns for this account
-     * will be check out before giving the bonus to the advocate's referrer.
+     * Make an attempt to give a bonus for to the advocate's referrer. The system processes the given
+     * advocate (referral) and creates a bonus for the advocate's referrer if is needed. All restrictions
+     * set on the campaigns for this account will be check out before giving the bonus to the advocate's
+     * referrer.
      *
-     * @param Models\BonusesForm $bonusesForm  The body of the request
      * @param string             $accountSlug  The account identifier
+     * @param Models\BonusesForm $bonusesForm  The body of the request
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function postBonuses(
-        $bonusesForm,
-        $accountSlug
+        $accountSlug,
+        $bonusesForm
     ) {
 
         //the base uri for api requests

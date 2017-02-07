@@ -502,8 +502,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 242;
-$limit = 242;
+$page = 155;
+$limit = 155;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -554,8 +554,8 @@ function getBonuses(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 242;
-$limit = 242;
+$page = 155;
+$limit = 155;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -566,31 +566,31 @@ $result = $bonuses->getBonuses($accountSlug, $page, $limit, $filter, $sort);
 
 #### <a name="post_bonuses"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.postBonuses") postBonuses
 
-> Create a new bonus for a given advocate token. The system processes the advocate and creates a bonus for the advocate's referrer if is needed. All restrictions set on the campaigns for this account will be check out before giving the bonus to the advocate's referrer.
+> Make an attempt to give a bonus for to the advocate's referrer. The system processes the given advocate (referral) and creates a bonus for the advocate's referrer if is needed. All restrictions set on the campaigns for this account will be check out before giving the bonus to the advocate's referrer.
 
 
 ```php
 function postBonuses(
-        $bonusesForm,
-        $accountSlug)
+        $accountSlug,
+        $bonusesForm)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| bonusesForm |  ``` Required ```  | The body of the request |
 | accountSlug |  ``` Required ```  | The account identifier |
+| bonusesForm |  ``` Required ```  | The body of the request |
 
 
 
 #### Example Usage
 
 ```php
-$bonusesForm = new BonusesForm();
 $accountSlug = 'account_slug';
+$bonusesForm = new BonusesForm();
 
-$result = $bonuses->postBonuses($bonusesForm, $accountSlug);
+$result = $bonuses->postBonuses($accountSlug, $bonusesForm);
 
 ```
 
@@ -625,7 +625,7 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 242.96473361457;
+$paymentAmount = 155.240230211169;
 
 $result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -687,7 +687,7 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 242;
+$traceId = 155;
 
 $result = $bonuses->getBonusesTrace($accountSlug, $traceId);
 
@@ -718,7 +718,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 242;
+$bonusId = 155;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -749,7 +749,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 242;
+$bonusId = 155;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
@@ -786,8 +786,8 @@ function getBonusesTraces(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 242;
-$limit = 242;
+$page = 113;
+$limit = 113;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -860,7 +860,7 @@ function getCampaigns(
 | accountSlug |  ``` Required ```  | The account identifier |
 | page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
 | limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
-| filter |  ``` Optional ```  | Allowed fields: name, description, start_date, end_date, is_active (true|false), created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
+| filter |  ``` Optional ```  | Allowed fields: name, description, start_date, end_date, is_active (true\|false), created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
 | sort |  ``` Optional ```  | Allowed fields: campaign_slug, created, start_date, end_date, is_active. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
 
 
@@ -869,8 +869,8 @@ function getCampaigns(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 242;
-$limit = 242;
+$page = 113;
+$limit = 113;
 $filter = 'filter';
 $sort = 'sort';
 
