@@ -62,6 +62,15 @@ class GeniusReferralsClient
     }
  
     /**
+     * Singleton access to RedemptionRequests controller
+     * @return Controllers\RedemptionRequestsController The *Singleton* instance
+     */
+    public function getRedemptionRequests()
+    {
+        return Controllers\RedemptionRequestsController::getInstance();
+    }
+ 
+    /**
      * Singleton access to Bonuses controller
      * @return Controllers\BonusesController The *Singleton* instance
      */

@@ -134,6 +134,7 @@ $client = new GeniusReferralsLib\GeniusReferralsClient($contentType, $xAuthToken
 * [AuthenticationsController](#authentications_controller)
 * [AdvocatesController](#advocates_controller)
 * [AccountsController](#accounts_controller)
+* [RedemptionRequestsController](#redemption_requests_controller)
 * [BonusesController](#bonuses_controller)
 * [CampaignsController](#campaigns_controller)
 
@@ -502,12 +503,91 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 229;
-$limit = 229;
+$page = 138;
+$limit = 138;
 $filter = 'filter';
 $sort = 'sort';
 
 $result = $accounts->getAccounts($page, $limit, $filter, $sort);
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+### <a name="redemption_requests_controller"></a>![Class: ](https://apidocs.io/img/class.png ".RedemptionRequestsController") RedemptionRequestsController
+
+#### Get singleton instance
+
+The singleton instance of the ``` RedemptionRequestsController ``` class can be accessed from the API Client.
+
+```php
+$redemptionRequests = $client->getRedemptionRequests();
+```
+
+#### <a name="post_redemption_request"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.postRedemptionRequest") postRedemptionRequest
+
+> Create a redemption request.
+
+
+```php
+function postRedemptionRequest($accountSlug)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+
+$result = $redemptionRequests->postRedemptionRequest($accountSlug);
+
+```
+
+
+#### <a name="get_redemption_requests"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.getRedemptionRequests") getRedemptionRequests
+
+> Get the list of redemption requests.
+
+
+```php
+function getRedemptionRequests(
+        $accountSlug,
+        $page = null,
+        $limit = null,
+        $filter = null,
+        $sort = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| filter |  ``` Optional ```  | Allowed fields: redemption_request_id, name, lastname, email, request_status_slug, request_action_slug, from, to, created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
+| sort |  ``` Optional ```  | Allowed fields: name, lastname, email, created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$page = 'page';
+$limit = 'limit';
+$filter = 'filter';
+$sort = 'sort';
+
+$result = $redemptionRequests->getRedemptionRequests($accountSlug, $page, $limit, $filter, $sort);
 
 ```
 
@@ -554,8 +634,8 @@ function getBonuses(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 229;
-$limit = 229;
+$page = 138;
+$limit = 138;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -625,7 +705,7 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 229.425676427514;
+$paymentAmount = 138.445276407732;
 
 $result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -687,7 +767,7 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 187;
+$traceId = 138;
 
 $result = $bonuses->getBonusesTrace($accountSlug, $traceId);
 
@@ -718,7 +798,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 187;
+$bonusId = 24;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -749,7 +829,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 187;
+$bonusId = 24;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
@@ -786,8 +866,8 @@ function getBonusesTraces(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 187;
-$limit = 187;
+$page = 24;
+$limit = 24;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -869,8 +949,8 @@ function getCampaigns(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 187;
-$limit = 187;
+$page = 24;
+$limit = 24;
 $filter = 'filter';
 $sort = 'sort';
 
