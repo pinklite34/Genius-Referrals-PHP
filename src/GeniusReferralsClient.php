@@ -26,6 +26,15 @@ class GeniusReferralsClient
     }
  
     /**
+     * Singleton access to Roots controller
+     * @return Controllers\RootsController The *Singleton* instance
+     */
+    public function getRoots()
+    {
+        return Controllers\RootsController::getInstance();
+    }
+ 
+    /**
      * Singleton access to Authentications controller
      * @return Controllers\AuthenticationsController The *Singleton* instance
      */
@@ -50,5 +59,23 @@ class GeniusReferralsClient
     public function getAccounts()
     {
         return Controllers\AccountsController::getInstance();
+    }
+ 
+    /**
+     * Singleton access to Bonuses controller
+     * @return Controllers\BonusesController The *Singleton* instance
+     */
+    public function getBonuses()
+    {
+        return Controllers\BonusesController::getInstance();
+    }
+ 
+    /**
+     * Singleton access to Campaigns controller
+     * @return Controllers\CampaignsController The *Singleton* instance
+     */
+    public function getCampaigns()
+    {
+        return Controllers\CampaignsController::getInstance();
     }
 }

@@ -130,9 +130,42 @@ $client = new GeniusReferralsLib\GeniusReferralsClient($contentType, $xAuthToken
 
 ### <a name="list_of_controllers"></a>List of Controllers
 
+* [RootsController](#roots_controller)
 * [AuthenticationsController](#authentications_controller)
 * [AdvocatesController](#advocates_controller)
 * [AccountsController](#accounts_controller)
+* [BonusesController](#bonuses_controller)
+* [CampaignsController](#campaigns_controller)
+
+### <a name="roots_controller"></a>![Class: ](https://apidocs.io/img/class.png ".RootsController") RootsController
+
+#### Get singleton instance
+
+The singleton instance of the ``` RootsController ``` class can be accessed from the API Client.
+
+```php
+$roots = $client->getRoots();
+```
+
+#### <a name="get_root"></a>![Method: ](https://apidocs.io/img/method.png ".RootsController.getRoot") getRoot
+
+> The root of the API
+
+
+```php
+function getRoot()
+```
+
+#### Example Usage
+
+```php
+
+$result = $roots->getRoot();
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
 
 ### <a name="authentications_controller"></a>![Class: ](https://apidocs.io/img/class.png ".AuthenticationsController") AuthenticationsController
 
@@ -469,12 +502,379 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 204;
-$limit = 204;
+$page = 242;
+$limit = 242;
 $filter = 'filter';
 $sort = 'sort';
 
 $result = $accounts->getAccounts($page, $limit, $filter, $sort);
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+### <a name="bonuses_controller"></a>![Class: ](https://apidocs.io/img/class.png ".BonusesController") BonusesController
+
+#### Get singleton instance
+
+The singleton instance of the ``` BonusesController ``` class can be accessed from the API Client.
+
+```php
+$bonuses = $client->getBonuses();
+```
+
+#### <a name="get_bonuses"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonuses") getBonuses
+
+> Get the list of bonuses for a given account.
+
+
+```php
+function getBonuses(
+        $accountSlug,
+        $page = null,
+        $limit = null,
+        $filter = null,
+        $sort = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| filter |  ``` Optional ```  | Allowed fields: name, lastname, email, campaign_slug, from, to, created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
+| sort |  ``` Optional ```  | Allowed fields: name, lastname, email, created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$page = 242;
+$limit = 242;
+$filter = 'filter';
+$sort = 'sort';
+
+$result = $bonuses->getBonuses($accountSlug, $page, $limit, $filter, $sort);
+
+```
+
+
+#### <a name="post_bonuses"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.postBonuses") postBonuses
+
+> Create a new bonus for a given advocate token. The system processes the advocate and creates a bonus for the advocate's referrer if is needed. All restrictions set on the campaigns for this account will be check out before giving the bonus to the advocate's referrer.
+
+
+```php
+function postBonuses(
+        $bonusesForm,
+        $accountSlug)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| bonusesForm |  ``` Required ```  | The body of the request |
+| accountSlug |  ``` Required ```  | The account identifier |
+
+
+
+#### Example Usage
+
+```php
+$bonusesForm = new BonusesForm();
+$accountSlug = 'account_slug';
+
+$result = $bonuses->postBonuses($bonusesForm, $accountSlug);
+
+```
+
+
+#### <a name="get_bonuses_checkup"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonusesCheckup") getBonusesCheckup
+
+> Check if there is a bonus to be given to the advocate. Allows the clients to check if there is a bonus to be given, it simulates the behaivor of a POST request to /accounts/{account_slug}/bonuses resource. This resource is idempotent.
+
+
+```php
+function getBonusesCheckup(
+        $accountSlug,
+        $advocateToken,
+        $reference,
+        $paymentAmount)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The referral's token. Usually the one that completed the purchase, or trigger an event. |
+| reference |  ``` Required ```  | The reference number for this request. Usually the order_id, payment_id, or timestamp. |
+| paymentAmount |  ``` Required ```  | The payment amount the referrals has made. Required for a percentage based campaign. |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$reference = 'reference';
+$paymentAmount = 242.96473361457;
+
+$result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
+
+```
+
+
+#### <a name="post_bonuses_force"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.postBonusesForce") postBonusesForce
+
+> Force the system to give a bonus to an advocate. The system will not take into account the restriccions specified on the campaigns.
+
+
+```php
+function postBonusesForce(
+        $accountSlug,
+        $bonusForm)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| bonusForm |  ``` Required ```  | The body of the request |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$bonusForm = new BonusesForm1();
+
+$result = $bonuses->postBonusesForce($accountSlug, $bonusForm);
+
+```
+
+
+#### <a name="get_bonuses_trace"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonusesTrace") getBonusesTrace
+
+> Get a bonus request trace.
+
+
+```php
+function getBonusesTrace(
+        $accountSlug,
+        $traceId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| traceId |  ``` Required ```  | The trace id |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$traceId = 242;
+
+$result = $bonuses->getBonusesTrace($accountSlug, $traceId);
+
+```
+
+
+#### <a name="delete_bonus"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.deleteBonus") deleteBonus
+
+> Delete a bonus
+
+
+```php
+function deleteBonus(
+        $accountSlug,
+        $bonusId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| bonusId |  ``` Required ```  | The bonus id |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$bonusId = 242;
+
+$bonuses->deleteBonus($accountSlug, $bonusId);
+
+```
+
+
+#### <a name="get_bonus"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonus") getBonus
+
+> Get a bonus by a given id.
+
+
+```php
+function getBonus(
+        $accountSlug,
+        $bonusId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| bonusId |  ``` Required ```  | The bonus id |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$bonusId = 242;
+
+$result = $bonuses->getBonus($accountSlug, $bonusId);
+
+```
+
+
+#### <a name="get_bonuses_traces"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonusesTraces") getBonusesTraces
+
+> Get the list of bonuses traces (audit trail). Every time the system tries to give a bonus the an advocate a new trace is created.
+
+
+```php
+function getBonusesTraces(
+        $accountSlug,
+        $page = null,
+        $limit = null,
+        $filter = null,
+        $sort = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| filter |  ``` Optional ```  | Allowed fields: reference, result, bonus_amount, advocate_token, advocate_referrer_token, campaign_slug, from, to, created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
+| sort |  ``` Optional ```  | Allowed fields: created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$page = 242;
+$limit = 242;
+$filter = 'filter';
+$sort = 'sort';
+
+$result = $bonuses->getBonusesTraces($accountSlug, $page, $limit, $filter, $sort);
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+### <a name="campaigns_controller"></a>![Class: ](https://apidocs.io/img/class.png ".CampaignsController") CampaignsController
+
+#### Get singleton instance
+
+The singleton instance of the ``` CampaignsController ``` class can be accessed from the API Client.
+
+```php
+$campaigns = $client->getCampaigns();
+```
+
+#### <a name="get_campaign"></a>![Method: ](https://apidocs.io/img/method.png ".CampaignsController.getCampaign") getCampaign
+
+> Get a campaign by a given slug.
+
+
+```php
+function getCampaign(
+        $accountSlug,
+        $campaignSlug)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| campaignSlug |  ``` Required ```  | The campaign identifier |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$campaignSlug = 'campaign_slug';
+
+$campaigns->getCampaign($accountSlug, $campaignSlug);
+
+```
+
+
+#### <a name="get_campaigns"></a>![Method: ](https://apidocs.io/img/method.png ".CampaignsController.getCampaigns") getCampaigns
+
+> Get the list of campaings for a given account.
+
+
+```php
+function getCampaigns(
+        $accountSlug,
+        $page = null,
+        $limit = null,
+        $filter = null,
+        $sort = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| filter |  ``` Optional ```  | Allowed fields: name, description, start_date, end_date, is_active (true|false), created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
+| sort |  ``` Optional ```  | Allowed fields: campaign_slug, created, start_date, end_date, is_active. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$page = 242;
+$limit = 242;
+$filter = 'filter';
+$sort = 'sort';
+
+$result = $campaigns->getCampaigns($accountSlug, $page, $limit, $filter, $sort);
 
 ```
 

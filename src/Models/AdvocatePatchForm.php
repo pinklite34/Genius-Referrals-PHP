@@ -16,7 +16,7 @@ class AdvocatePatchForm implements JsonSerializable
 {
     /**
      * The advocate's name
-     * @var array $name public property
+     * @var string $name public property
      */
     public $name;
 
@@ -81,8 +81,14 @@ class AdvocatePatchForm implements JsonSerializable
     public $canRefer;
 
     /**
+     * The advocate's token
+     * @var string $token public property
+     */
+    public $token;
+
+    /**
      * Constructor to set initial or default values of member properties
-     * @param array   $name             Initialization value for $this->name
+     * @param string  $name             Initialization value for $this->name
      * @param string  $lastname         Initialization value for $this->lastname
      * @param string  $email            Initialization value for $this->email
      * @param integer $payoutThreshold  Initialization value for $this->payoutThreshold
@@ -92,10 +98,11 @@ class AdvocatePatchForm implements JsonSerializable
      * @param string  $avatarUrl        Initialization value for $this->avatarUrl
      * @param string  $metadata         Initialization value for $this->metadata
      * @param bool    $canRefer         Initialization value for $this->canRefer
+     * @param string  $token            Initialization value for $this->token
      */
     public function __construct()
     {
-        if (10 == func_num_args()) {
+        if (11 == func_num_args()) {
             $this->name             = func_get_arg(0);
             $this->lastname         = func_get_arg(1);
             $this->email            = func_get_arg(2);
@@ -106,6 +113,7 @@ class AdvocatePatchForm implements JsonSerializable
             $this->avatarUrl        = func_get_arg(7);
             $this->metadata         = func_get_arg(8);
             $this->canRefer         = func_get_arg(9);
+            $this->token            = func_get_arg(10);
         }
     }
 
@@ -126,6 +134,7 @@ class AdvocatePatchForm implements JsonSerializable
         $json['avatar_url']        = $this->avatarUrl;
         $json['metadata']          = $this->metadata;
         $json['can_refer']         = $this->canRefer;
+        $json['token']             = $this->token;
 
         return $json;
     }
