@@ -134,6 +134,7 @@ $client = new GeniusReferralsLib\GeniusReferralsClient($contentType, $xAuthToken
 * [AuthenticationsController](#authentications_controller)
 * [AdvocatesController](#advocates_controller)
 * [AccountsController](#accounts_controller)
+* [ReferralsController](#referrals_controller)
 * [RedemptionRequestsController](#redemption_requests_controller)
 * [BonusesController](#bonuses_controller)
 * [CampaignsController](#campaigns_controller)
@@ -503,12 +504,251 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 39;
-$limit = 39;
+$page = 213;
+$limit = 213;
 $filter = 'filter';
 $sort = 'sort';
 
 $result = $accounts->getAccounts($page, $limit, $filter, $sort);
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+### <a name="referrals_controller"></a>![Class: ](https://apidocs.io/img/class.png ".ReferralsController") ReferralsController
+
+#### Get singleton instance
+
+The singleton instance of the ``` ReferralsController ``` class can be accessed from the API Client.
+
+```php
+$referrals = $client->getReferrals();
+```
+
+#### <a name="get_referral_origin"></a>![Method: ](https://apidocs.io/img/method.png ".ReferralsController.getReferralOrigin") getReferralOrigin
+
+> Get a referral origin by a given slug.
+
+
+```php
+function getReferralOrigin($referralOriginSlug)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| referralOriginSlug |  ``` Required ```  | The referral origin identifier |
+
+
+
+#### Example Usage
+
+```php
+$referralOriginSlug = 'referral_origin_slug';
+
+$result = $referrals->getReferralOrigin($referralOriginSlug);
+
+```
+
+
+#### <a name="get_referral_origins"></a>![Method: ](https://apidocs.io/img/method.png ".ReferralsController.getReferralOrigins") getReferralOrigins
+
+> Get referral origins. This is needed when creating (POST) a new referral, as referral_origin_slug refers to one of this origins.
+
+
+```php
+function getReferralOrigins()
+```
+
+#### Example Usage
+
+```php
+
+$result = $referrals->getReferralOrigins();
+
+```
+
+
+#### <a name="get_referral"></a>![Method: ](https://apidocs.io/img/method.png ".ReferralsController.getReferral") getReferral
+
+> Get a referral by a given id.
+
+
+```php
+function getReferral(
+        $accountSlug,
+        $advocateToken,
+        $referralId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| referralId |  ``` Required ```  | The referral id |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$referralId = 'referral_id';
+
+$result = $referrals->getReferral($accountSlug, $advocateToken, $referralId);
+
+```
+
+
+#### <a name="delete_referral"></a>![Method: ](https://apidocs.io/img/method.png ".ReferralsController.deleteReferral") deleteReferral
+
+> Delete a referral.
+
+
+```php
+function deleteReferral(
+        $accountSlug,
+        $advocateToken,
+        $referralId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| referralId |  ``` Required ```  | The referral identifier |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$referralId = 'referral_id';
+
+$referrals->deleteReferral($accountSlug, $advocateToken, $referralId);
+
+```
+
+
+#### <a name="post_referrals"></a>![Method: ](https://apidocs.io/img/method.png ".ReferralsController.postReferrals") postReferrals
+
+> Create a new referral.
+
+
+```php
+function postReferrals(
+        $accountSlug,
+        $advocateToken,
+        $referralForm)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| referralForm |  ``` Required ```  | The body of the request |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$referralForm = new ReferralForm();
+
+$result = $referrals->postReferrals($accountSlug, $advocateToken, $referralForm);
+
+```
+
+
+#### <a name="put_referral"></a>![Method: ](https://apidocs.io/img/method.png ".ReferralsController.putReferral") putReferral
+
+> Update a referral.
+
+
+```php
+function putReferral(
+        $accountSlug,
+        $advocateToken,
+        $referralId,
+        $referralForm)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| referralId |  ``` Required ```  | The referral id |
+| referralForm |  ``` Required ```  | The body of the request |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$referralId = 'referral_id';
+$referralForm = new ReferralForm();
+
+$result = $referrals->putReferral($accountSlug, $advocateToken, $referralId, $referralForm);
+
+```
+
+
+#### <a name="get_referrals"></a>![Method: ](https://apidocs.io/img/method.png ".ReferralsController.getReferrals") getReferrals
+
+> Get the list of referrals for a given advocate.
+
+
+```php
+function getReferrals(
+        $accountSlug,
+        $advocateToken,
+        $page = null,
+        $limit = null,
+        $filter = null,
+        $sort = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| filter |  ``` Optional ```  | Allowed fields: url, referral_origin_slug, created. Use the following delimiters to build your filters params. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
+| sort |  ``` Optional ```  | Allowed fields: created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$page = 213;
+$limit = 213;
+$filter = 'filter';
+$sort = 'sort';
+
+$result = $referrals->getReferrals($accountSlug, $advocateToken, $page, $limit, $filter, $sort);
 
 ```
 
@@ -639,7 +879,7 @@ function patchRedemptionRequest(
 
 ```php
 $accountSlug = 'account_slug';
-$redemptionRequestId = 39;
+$redemptionRequestId = 213;
 
 $redemptionRequests->patchRedemptionRequest($accountSlug, $redemptionRequestId);
 
@@ -790,8 +1030,8 @@ function getBonuses(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 252;
-$limit = 252;
+$page = 141;
+$limit = 141;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -861,7 +1101,7 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 252.554922044536;
+$paymentAmount = 141.9217787366;
 
 $result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -923,7 +1163,7 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 252;
+$traceId = 141;
 
 $result = $bonuses->getBonusesTrace($accountSlug, $traceId);
 
@@ -954,7 +1194,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 252;
+$bonusId = 141;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -985,7 +1225,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 252;
+$bonusId = 141;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
@@ -1022,8 +1262,8 @@ function getBonusesTraces(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 252;
-$limit = 252;
+$page = 141;
+$limit = 141;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1105,8 +1345,8 @@ function getCampaigns(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 252;
-$limit = 252;
+$page = 141;
+$limit = 141;
 $filter = 'filter';
 $sort = 'sort';
 
