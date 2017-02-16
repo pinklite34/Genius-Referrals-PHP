@@ -505,8 +505,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 64;
-$limit = 64;
+$page = 252;
+$limit = 252;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -612,7 +612,7 @@ function getTopAdvocates(
 ```php
 $accountSlug = 'account_slug';
 $campaignSlug = 'campaign_slug';
-$limit = 22;
+$limit = 252;
 $from = date("D M d, Y G:i");
 $to = date("D M d, Y G:i");
 
@@ -1010,8 +1010,8 @@ function getReferrals(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$page = 22;
-$limit = 22;
+$page = 252;
+$limit = 252;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1146,7 +1146,7 @@ function patchRedemptionRequest(
 
 ```php
 $accountSlug = 'account_slug';
-$redemptionRequestId = 22;
+$redemptionRequestId = 252;
 
 $redemptionRequests->patchRedemptionRequest($accountSlug, $redemptionRequestId);
 
@@ -1297,8 +1297,8 @@ function getBonuses(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 22;
-$limit = 22;
+$page = 211;
+$limit = 211;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1368,7 +1368,7 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 22.8362184031104;
+$paymentAmount = 211.165937798175;
 
 $result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -1430,7 +1430,7 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 22;
+$traceId = 211;
 
 $result = $bonuses->getBonusesTrace($accountSlug, $traceId);
 
@@ -1461,7 +1461,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 22;
+$bonusId = 211;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -1492,7 +1492,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 22;
+$bonusId = 211;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
@@ -1529,8 +1529,8 @@ function getBonusesTraces(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 114;
-$limit = 114;
+$page = 211;
+$limit = 211;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1577,7 +1577,7 @@ function getCampaign(
 $accountSlug = 'account_slug';
 $campaignSlug = 'campaign_slug';
 
-$campaigns->getCampaign($accountSlug, $campaignSlug);
+$result = $campaigns->getCampaign($accountSlug, $campaignSlug);
 
 ```
 
@@ -1612,8 +1612,8 @@ function getCampaigns(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 114;
-$limit = 114;
+$page = 211;
+$limit = 211;
 $filter = 'filter';
 $sort = 'sort';
 

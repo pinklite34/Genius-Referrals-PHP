@@ -46,7 +46,7 @@ class CampaignsController extends BaseController
      *
      * @param string $accountSlug   The account identifier
      * @param string $campaignSlug  The campaign identifier
-     * @return void response from the API call
+     * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function getCampaign(
@@ -72,6 +72,7 @@ class CampaignsController extends BaseController
         //prepare headers
         $_headers = array (
             'user-agent'    => 'APIMATIC 2.0',
+            'Accept'        => 'application/json',
             'Content-Type' => Configuration::$contentType,
             'X-Auth-Token' => Configuration::$xAuthToken
         );
@@ -95,6 +96,8 @@ class CampaignsController extends BaseController
 
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
     }
 
     /**
