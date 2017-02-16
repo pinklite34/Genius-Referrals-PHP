@@ -337,7 +337,7 @@ class ReferralsController extends BaseController
      * @param string              $advocateToken  The advocate's token
      * @param string              $referralId     The referral id
      * @param Models\ReferralForm $referralForm   The body of the request
-     * @return mixed response from the API call
+     * @return void response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function putReferral(
@@ -366,7 +366,6 @@ class ReferralsController extends BaseController
         //prepare headers
         $_headers = array (
             'user-agent'    => 'APIMATIC 2.0',
-            'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8',
             'Content-Type' => Configuration::$contentType,
             'X-Auth-Token' => Configuration::$xAuthToken
@@ -391,8 +390,6 @@ class ReferralsController extends BaseController
 
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
-
-        return $response->body;
     }
 
     /**

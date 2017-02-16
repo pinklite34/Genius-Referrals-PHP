@@ -270,7 +270,7 @@ $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $advocateForm = new AdvocateForm();
 
-$result = $advocates->putAdvocate($accountSlug, $advocateToken, $advocateForm);
+$advocates->putAdvocate($accountSlug, $advocateToken, $advocateForm);
 
 ```
 
@@ -505,8 +505,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 5;
-$limit = 5;
+$page = 64;
+$limit = 64;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -612,7 +612,7 @@ function getTopAdvocates(
 ```php
 $accountSlug = 'account_slug';
 $campaignSlug = 'campaign_slug';
-$limit = 5;
+$limit = 22;
 $from = date("D M d, Y G:i");
 $to = date("D M d, Y G:i");
 
@@ -972,7 +972,7 @@ $advocateToken = 'advocate_token';
 $referralId = 'referral_id';
 $referralForm = new ReferralForm();
 
-$result = $referrals->putReferral($accountSlug, $advocateToken, $referralId, $referralForm);
+$referrals->putReferral($accountSlug, $advocateToken, $referralId, $referralForm);
 
 ```
 
@@ -1010,8 +1010,8 @@ function getReferrals(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$page = 5;
-$limit = 5;
+$page = 22;
+$limit = 22;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1146,7 +1146,7 @@ function patchRedemptionRequest(
 
 ```php
 $accountSlug = 'account_slug';
-$redemptionRequestId = 5;
+$redemptionRequestId = 22;
 
 $redemptionRequests->patchRedemptionRequest($accountSlug, $redemptionRequestId);
 
@@ -1297,8 +1297,8 @@ function getBonuses(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 219;
-$limit = 219;
+$page = 22;
+$limit = 22;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1368,7 +1368,7 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 219.181980420454;
+$paymentAmount = 22.8362184031104;
 
 $result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -1430,7 +1430,7 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 219;
+$traceId = 22;
 
 $result = $bonuses->getBonusesTrace($accountSlug, $traceId);
 
@@ -1461,7 +1461,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 219;
+$bonusId = 22;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -1492,7 +1492,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 219;
+$bonusId = 22;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
@@ -1529,8 +1529,8 @@ function getBonusesTraces(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 219;
-$limit = 219;
+$page = 114;
+$limit = 114;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1612,8 +1612,8 @@ function getCampaigns(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 219;
-$limit = 219;
+$page = 114;
+$limit = 114;
 $filter = 'filter';
 $sort = 'sort';
 

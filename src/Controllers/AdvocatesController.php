@@ -103,7 +103,7 @@ class AdvocatesController extends BaseController
      * @param string              $accountSlug    The account identifier
      * @param string              $advocateToken  The advocate's token
      * @param Models\AdvocateForm $advocateForm   The body of the request
-     * @return mixed response from the API call
+     * @return void response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function putAdvocate(
@@ -130,7 +130,6 @@ class AdvocatesController extends BaseController
         //prepare headers
         $_headers = array (
             'user-agent'    => 'APIMATIC 2.0',
-            'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8',
             'Content-Type' => Configuration::$contentType,
             'X-Auth-Token' => Configuration::$xAuthToken
@@ -155,8 +154,6 @@ class AdvocatesController extends BaseController
 
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
-
-        return $response->body;
     }
 
     /**
