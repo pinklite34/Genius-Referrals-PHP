@@ -47,7 +47,7 @@ class AuthenticationsController extends BaseController
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function getAuthentications()
+    public function getAuthentication()
     {
 
         //the base uri for api requests

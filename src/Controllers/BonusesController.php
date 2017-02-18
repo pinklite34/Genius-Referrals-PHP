@@ -139,7 +139,7 @@ class BonusesController extends BaseController
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function postBonuses(
+    public function postBonus(
         $accountSlug,
         $bonusesForm
     ) {
@@ -205,7 +205,7 @@ class BonusesController extends BaseController
      * @return string response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function getBonusesCheckup(
+    public function getBonusCheckup(
         $accountSlug,
         $advocateToken,
         $reference,
@@ -272,7 +272,7 @@ class BonusesController extends BaseController
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function postForceBonuses(
+    public function postForceBonus(
         $accountSlug,
         $bonusForm
     ) {
@@ -331,7 +331,7 @@ class BonusesController extends BaseController
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function getBonusesTrace(
+    public function getBonusTrace(
         $accountSlug,
         $traceId
     ) {
@@ -524,7 +524,7 @@ class BonusesController extends BaseController
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function getBonusesTraces(
+    public function getBonusTraces(
         $accountSlug,
         $page = 1,
         $limit = 10,

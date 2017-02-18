@@ -180,20 +180,20 @@ The singleton instance of the ``` AuthenticationsController ``` class can be acc
 $authentications = $client->getAuthentications();
 ```
 
-#### <a name="get_authentications"></a>![Method: ](https://apidocs.io/img/method.png ".AuthenticationsController.getAuthentications") getAuthentications
+#### <a name="get_authentication"></a>![Method: ](https://apidocs.io/img/method.png ".AuthenticationsController.getAuthentication") getAuthentication
 
 > Allow clients to test authentication on Genius Referrals platform.
 
 
 ```php
-function getAuthentications()
+function getAuthentication()
 ```
 
 #### Example Usage
 
 ```php
 
-$result = $authentications->getAuthentications();
+$result = $authentications->getAuthentication();
 
 ```
 
@@ -435,6 +435,275 @@ $advocatePatchForm = new AdvocatePatchForm();
 $advocatePatchForm = array($advocatePatchForm);
 
 $result = $advocates->patchAdvocate($accountSlug, $advocateToken, $advocatePatchForm);
+
+```
+
+
+#### <a name="get_share_links"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.getShareLinks") getShareLinks
+
+> Get the advocates share links. These are the links that advocates use to share your services online.  Share links are wrapped per campaign and widget package.
+
+
+```php
+function getShareLinks(
+        $accountSlug,
+        $advocateToken)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+
+$result = $advocates->getShareLinks($accountSlug, $advocateToken);
+
+```
+
+
+#### <a name="put_payment_method"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.putPaymentMethod") putPaymentMethod
+
+> Update a payment method.
+
+
+```php
+function putPaymentMethod(
+        $accountSlug,
+        $advocateToken,
+        $advocatePaymentMethodId,
+        $advocatePaymentMethod)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The advocate's token |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| advocatePaymentMethodId |  ``` Required ```  | The payment method's identifier |
+| advocatePaymentMethod |  ``` Required ```  | The body of the request |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$advocatePaymentMethodId = 98;
+$advocatePaymentMethod = new PaymentMethodForm();
+
+$advocates->putPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethodId, $advocatePaymentMethod);
+
+```
+
+
+#### <a name="get_payment_method"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.getPaymentMethod") getPaymentMethod
+
+> Get an advocate's payment method
+
+
+```php
+function getPaymentMethod(
+        $accountSlug,
+        $advocateToken,
+        $advocatePaymentMethodId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| advocatePaymentMethodId |  ``` Required ```  | The payment method's identifier |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$advocatePaymentMethodId = 98;
+
+$result = $advocates->getPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethodId);
+
+```
+
+
+#### <a name="post_payment_method"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.postPaymentMethod") postPaymentMethod
+
+> Create a new payment method.
+
+
+```php
+function postPaymentMethod(
+        $accountSlug,
+        $advocateToken,
+        $advocatePaymentMethod)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| advocatePaymentMethod |  ``` Required ```  | The body of the request |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$advocatePaymentMethod = new PaymentMethodForm();
+
+$result = $advocates->postPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethod);
+
+```
+
+
+#### <a name="get_bonus_redemption_method"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.getBonusRedemptionMethod") getBonusRedemptionMethod
+
+> Get bonuses redemption method.
+
+
+```php
+function getBonusRedemptionMethod($bonusesRedemptionMethodSlug)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| bonusesRedemptionMethodSlug |  ``` Required ```  | The bonus redemption method's identifier |
+
+
+
+#### Example Usage
+
+```php
+$bonusesRedemptionMethodSlug = 'bonuses_redemption_method_slug';
+
+$result = $advocates->getBonusRedemptionMethod($bonusesRedemptionMethodSlug);
+
+```
+
+
+#### <a name="get_bonus_redemption_methods"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.getBonusRedemptionMethods") getBonusRedemptionMethods
+
+> Get bonuses redemption methods.
+
+
+```php
+function getBonusRedemptionMethods()
+```
+
+#### Example Usage
+
+```php
+
+$result = $advocates->getBonusRedemptionMethods();
+
+```
+
+
+#### <a name="get_currencies"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.getCurrencies") getCurrencies
+
+> Get currencies.
+
+
+```php
+function getCurrencies()
+```
+
+#### Example Usage
+
+```php
+
+$result = $advocates->getCurrencies();
+
+```
+
+
+#### <a name="get_currency"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.getCurrency") getCurrency
+
+> Get a currency.
+
+
+```php
+function getCurrency($code)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| code |  ``` Required ```  | The currency's code |
+
+
+
+#### Example Usage
+
+```php
+$code = 'code';
+
+$result = $advocates->getCurrency($code);
+
+```
+
+
+#### <a name="get_payment_methods"></a>![Method: ](https://apidocs.io/img/method.png ".AdvocatesController.getPaymentMethods") getPaymentMethods
+
+> Get the advocate's payment methods.
+
+
+```php
+function getPaymentMethods(
+        $accountSlug,
+        $advocateToken,
+        $page = 1,
+        $limit = 10,
+        $filter = null,
+        $sort = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| accountSlug |  ``` Required ```  | The account identifier |
+| advocateToken |  ``` Required ```  | The advocate's token |
+| page |  ``` Optional ```  ``` DefaultValue ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  ``` DefaultValue ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| filter |  ``` Optional ```  | Allowed fields: username, is_active. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
+| sort |  ``` Optional ```  | Allowed fields: username, created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort=last_name\|first_name\|-hire_date |
+
+
+
+#### Example Usage
+
+```php
+$accountSlug = 'account_slug';
+$advocateToken = 'advocate_token';
+$page = 1;
+$limit = 10;
+$filter = 'filter';
+$sort = 'sort';
+
+$result = $advocates->getPaymentMethods($accountSlug, $advocateToken, $page, $limit, $filter, $sort);
 
 ```
 
@@ -906,13 +1175,13 @@ $referrals->deleteReferral($accountSlug, $advocateToken, $referralId);
 ```
 
 
-#### <a name="post_referrals"></a>![Method: ](https://apidocs.io/img/method.png ".ReferralsController.postReferrals") postReferrals
+#### <a name="post_referral"></a>![Method: ](https://apidocs.io/img/method.png ".ReferralsController.postReferral") postReferral
 
 > Create a new referral.
 
 
 ```php
-function postReferrals(
+function postReferral(
         $accountSlug,
         $advocateToken,
         $referralForm)
@@ -935,7 +1204,7 @@ $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $referralForm = new ReferralForm();
 
-$result = $referrals->postReferrals($accountSlug, $advocateToken, $referralForm);
+$result = $referrals->postReferral($accountSlug, $advocateToken, $referralForm);
 
 ```
 
@@ -1146,7 +1415,7 @@ function patchRedemptionRequest(
 
 ```php
 $accountSlug = 'account_slug';
-$redemptionRequestId = 227;
+$redemptionRequestId = 56;
 
 $redemptionRequests->patchRedemptionRequest($accountSlug, $redemptionRequestId);
 
@@ -1255,33 +1524,6 @@ $result = $redemptionRequests->getRedemptionRequests($accountSlug, $page, $limit
 ```
 
 
-#### <a name="get_test"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.getTest") getTest
-
-> TODO: Add a method description
-
-
-```php
-function getTest($operation)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| operation |  ``` Required ```  | TODO: Add a parameter description |
-
-
-
-#### Example Usage
-
-```php
-$operation = 'operation';
-
-$redemptionRequests->getTest($operation);
-
-```
-
-
 [Back to List of Controllers](#list_of_controllers)
 
 ### <a name="bonuses_controller"></a>![Class: ](https://apidocs.io/img/class.png ".BonusesController") BonusesController
@@ -1334,13 +1576,13 @@ $result = $bonuses->getBonuses($accountSlug, $page, $limit, $filter, $sort);
 ```
 
 
-#### <a name="post_bonuses"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.postBonuses") postBonuses
+#### <a name="post_bonus"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.postBonus") postBonus
 
 > Make an attempt to give a bonus for to the advocate's referrer. The system processes the given advocate (referral) and creates a bonus for the advocate's referrer if is needed. All restrictions set on the campaigns for this account will be check out before giving the bonus to the advocate's referrer.
 
 
 ```php
-function postBonuses(
+function postBonus(
         $accountSlug,
         $bonusesForm)
 ```
@@ -1360,18 +1602,18 @@ function postBonuses(
 $accountSlug = 'account_slug';
 $bonusesForm = new BonusesForm();
 
-$result = $bonuses->postBonuses($accountSlug, $bonusesForm);
+$result = $bonuses->postBonus($accountSlug, $bonusesForm);
 
 ```
 
 
-#### <a name="get_bonuses_checkup"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonusesCheckup") getBonusesCheckup
+#### <a name="get_bonus_checkup"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonusCheckup") getBonusCheckup
 
 > Check if there is a bonus to be given to the advocate. Allows the clients to check if there is a bonus to be given, it simulates the behaivor of a POST request to /accounts/{account_slug}/bonuses resource. This resource is idempotent.
 
 
 ```php
-function getBonusesCheckup(
+function getBonusCheckup(
         $accountSlug,
         $advocateToken,
         $reference,
@@ -1395,20 +1637,20 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 63.6197656991984;
+$paymentAmount = 148.290048089479;
 
-$result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
+$result = $bonuses->getBonusCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
 ```
 
 
-#### <a name="post_force_bonuses"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.postForceBonuses") postForceBonuses
+#### <a name="post_force_bonus"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.postForceBonus") postForceBonus
 
 > Force the system to give a bonus to an advocate. The system will not take into account the restriccions specified on the campaigns.
 
 
 ```php
-function postForceBonuses(
+function postForceBonus(
         $accountSlug,
         $bonusForm)
 ```
@@ -1428,18 +1670,18 @@ function postForceBonuses(
 $accountSlug = 'account_slug';
 $bonusForm = new ForceBonusesForm();
 
-$result = $bonuses->postForceBonuses($accountSlug, $bonusForm);
+$result = $bonuses->postForceBonus($accountSlug, $bonusForm);
 
 ```
 
 
-#### <a name="get_bonuses_trace"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonusesTrace") getBonusesTrace
+#### <a name="get_bonus_trace"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonusTrace") getBonusTrace
 
 > Get a bonus request trace.
 
 
 ```php
-function getBonusesTrace(
+function getBonusTrace(
         $accountSlug,
         $traceId)
 ```
@@ -1457,9 +1699,9 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 63;
+$traceId = 148;
 
-$result = $bonuses->getBonusesTrace($accountSlug, $traceId);
+$result = $bonuses->getBonusTrace($accountSlug, $traceId);
 
 ```
 
@@ -1488,7 +1730,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 63;
+$bonusId = 148;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -1519,20 +1761,20 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 63;
+$bonusId = 148;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
 ```
 
 
-#### <a name="get_bonuses_traces"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonusesTraces") getBonusesTraces
+#### <a name="get_bonus_traces"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.getBonusTraces") getBonusTraces
 
 > Get the list of bonuses traces (audit trail). Every time the system tries to give a bonus the an advocate a new trace is created.
 
 
 ```php
-function getBonusesTraces(
+function getBonusTraces(
         $accountSlug,
         $page = 1,
         $limit = 10,
@@ -1561,7 +1803,7 @@ $limit = 10;
 $filter = 'filter';
 $sort = 'sort';
 
-$result = $bonuses->getBonusesTraces($accountSlug, $page, $limit, $filter, $sort);
+$result = $bonuses->getBonusTraces($accountSlug, $page, $limit, $filter, $sort);
 
 ```
 

@@ -277,7 +277,7 @@ class ReferralsController extends BaseController
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function postReferrals(
+    public function postReferral(
         $accountSlug,
         $advocateToken,
         $referralForm
