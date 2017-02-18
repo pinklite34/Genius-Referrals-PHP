@@ -499,7 +499,7 @@ function putPaymentMethod(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$advocatePaymentMethodId = 98;
+$advocatePaymentMethodId = 230;
 $advocatePaymentMethod = new PaymentMethodForm();
 
 $advocates->putPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethodId, $advocatePaymentMethod);
@@ -534,7 +534,7 @@ function getPaymentMethod(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$advocatePaymentMethodId = 98;
+$advocatePaymentMethodId = 230;
 
 $result = $advocates->getPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethodId);
 
@@ -1415,7 +1415,7 @@ function patchRedemptionRequest(
 
 ```php
 $accountSlug = 'account_slug';
-$redemptionRequestId = 56;
+$redemptionRequestId = 66;
 
 $redemptionRequests->patchRedemptionRequest($accountSlug, $redemptionRequestId);
 
@@ -1637,7 +1637,7 @@ function getBonusCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 148.290048089479;
+$paymentAmount = 25.2362748306414;
 
 $result = $bonuses->getBonusCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -1699,7 +1699,7 @@ function getBonusTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 148;
+$traceId = 25;
 
 $result = $bonuses->getBonusTrace($accountSlug, $traceId);
 
@@ -1730,7 +1730,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 148;
+$bonusId = 25;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -1761,7 +1761,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 148;
+$bonusId = 25;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
