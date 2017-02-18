@@ -25,9 +25,12 @@ CURL used to include a list of accepted CAs, but no longer bundles ANY CA certs.
 ; absolute path.
 ;curl.cainfo =
 ```
+##How to Intall on your Project via Composer
+```
+composer install geniusreferrals/geniusreferrals
+```
 
 ## How to Use
-
 The following section explains how to use the GeniusReferrals library in a new project.
 
 ### 1. Open Project in an IDE
