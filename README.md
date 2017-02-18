@@ -485,8 +485,8 @@ $result = $accounts->getAccount($accountSlug);
 
 ```php
 function getAccounts(
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null)
 ```
@@ -495,8 +495,8 @@ function getAccounts(
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
-| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| page |  ``` Optional ```  ``` DefaultValue ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  ``` DefaultValue ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
 | filter |  ``` Optional ```  | Allowed fields: name. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
 | sort |  ``` Optional ```  | Allowed fields: name, created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort=last_name\|first_name\|-hire_date |
 
@@ -505,8 +505,8 @@ function getAccounts(
 #### Example Usage
 
 ```php
-$page = 252;
-$limit = 252;
+$page = 1;
+$limit = 10;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -590,7 +590,7 @@ $result = $reports->getBonusesSummaryPerOrigin($advocateToken);
 function getTopAdvocates(
         $accountSlug = null,
         $campaignSlug = null,
-        $limit = null,
+        $limit = 10,
         $from = null,
         $to = null)
 ```
@@ -601,7 +601,7 @@ function getTopAdvocates(
 |-----------|------|-------------|
 | accountSlug |  ``` Optional ```  | The account identifier |
 | campaignSlug |  ``` Optional ```  | The campaign identifier |
-| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10) |
+| limit |  ``` Optional ```  ``` DefaultValue ```  | Maximum number of results to return in the response. Default (10) |
 | from |  ``` Optional ```  | The datetime were the range of the search starts |
 | to |  ``` Optional ```  | The datetime were the range of the search stops |
 
@@ -612,7 +612,7 @@ function getTopAdvocates(
 ```php
 $accountSlug = 'account_slug';
 $campaignSlug = 'campaign_slug';
-$limit = 252;
+$limit = 10;
 $from = date("D M d, Y G:i");
 $to = date("D M d, Y G:i");
 
@@ -986,8 +986,8 @@ $referrals->putReferral($accountSlug, $advocateToken, $referralId, $referralForm
 function getReferrals(
         $accountSlug,
         $advocateToken,
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null)
 ```
@@ -998,8 +998,8 @@ function getReferrals(
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
 | advocateToken |  ``` Required ```  | The advocate's token |
-| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
-| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| page |  ``` Optional ```  ``` DefaultValue ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  ``` DefaultValue ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
 | filter |  ``` Optional ```  | Allowed fields: url, referral_origin_slug, created. Use the following delimiters to build your filters params. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
 | sort |  ``` Optional ```  | Allowed fields: created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
 
@@ -1010,8 +1010,8 @@ function getReferrals(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$page = 252;
-$limit = 252;
+$page = 1;
+$limit = 10;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1146,7 +1146,7 @@ function patchRedemptionRequest(
 
 ```php
 $accountSlug = 'account_slug';
-$redemptionRequestId = 252;
+$redemptionRequestId = 227;
 
 $redemptionRequests->patchRedemptionRequest($accountSlug, $redemptionRequestId);
 
@@ -1223,8 +1223,8 @@ $result = $redemptionRequests->getRedemptionRequest($accountSlug, $redemptionReq
 ```php
 function getRedemptionRequests(
         $accountSlug,
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null)
 ```
@@ -1234,8 +1234,8 @@ function getRedemptionRequests(
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
-| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
-| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| page |  ``` Optional ```  ``` DefaultValue ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  ``` DefaultValue ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
 | filter |  ``` Optional ```  | Allowed fields: redemption_request_id, name, lastname, email, request_status_slug, request_action_slug, from, to, created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
 | sort |  ``` Optional ```  | Allowed fields: name, lastname, email, created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
 
@@ -1245,12 +1245,39 @@ function getRedemptionRequests(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 'page';
-$limit = 'limit';
+$page = 1;
+$limit = 10;
 $filter = 'filter';
 $sort = 'sort';
 
 $result = $redemptionRequests->getRedemptionRequests($accountSlug, $page, $limit, $filter, $sort);
+
+```
+
+
+#### <a name="get_test"></a>![Method: ](https://apidocs.io/img/method.png ".RedemptionRequestsController.getTest") getTest
+
+> TODO: Add a method description
+
+
+```php
+function getTest($operation)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| operation |  ``` Required ```  | TODO: Add a parameter description |
+
+
+
+#### Example Usage
+
+```php
+$operation = 'operation';
+
+$redemptionRequests->getTest($operation);
 
 ```
 
@@ -1275,8 +1302,8 @@ $bonuses = $client->getBonuses();
 ```php
 function getBonuses(
         $accountSlug,
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null)
 ```
@@ -1286,8 +1313,8 @@ function getBonuses(
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
-| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
-| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| page |  ``` Optional ```  ``` DefaultValue ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  ``` DefaultValue ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
 | filter |  ``` Optional ```  | Allowed fields: name, lastname, email, campaign_slug, from, to, created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
 | sort |  ``` Optional ```  | Allowed fields: name, lastname, email, created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
 
@@ -1297,8 +1324,8 @@ function getBonuses(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 211;
-$limit = 211;
+$page = 1;
+$limit = 10;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1368,20 +1395,20 @@ function getBonusesCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 211.165937798175;
+$paymentAmount = 63.6197656991984;
 
 $result = $bonuses->getBonusesCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
 ```
 
 
-#### <a name="post_bonuses_force"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.postBonusesForce") postBonusesForce
+#### <a name="post_force_bonuses"></a>![Method: ](https://apidocs.io/img/method.png ".BonusesController.postForceBonuses") postForceBonuses
 
 > Force the system to give a bonus to an advocate. The system will not take into account the restriccions specified on the campaigns.
 
 
 ```php
-function postBonusesForce(
+function postForceBonuses(
         $accountSlug,
         $bonusForm)
 ```
@@ -1399,9 +1426,9 @@ function postBonusesForce(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusForm = new BonusesForm1();
+$bonusForm = new ForceBonusesForm();
 
-$result = $bonuses->postBonusesForce($accountSlug, $bonusForm);
+$result = $bonuses->postForceBonuses($accountSlug, $bonusForm);
 
 ```
 
@@ -1430,7 +1457,7 @@ function getBonusesTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 211;
+$traceId = 63;
 
 $result = $bonuses->getBonusesTrace($accountSlug, $traceId);
 
@@ -1461,7 +1488,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 211;
+$bonusId = 63;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -1492,7 +1519,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 211;
+$bonusId = 63;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 
@@ -1507,8 +1534,8 @@ $result = $bonuses->getBonus($accountSlug, $bonusId);
 ```php
 function getBonusesTraces(
         $accountSlug,
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null)
 ```
@@ -1518,8 +1545,8 @@ function getBonusesTraces(
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
-| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
-| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| page |  ``` Optional ```  ``` DefaultValue ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  ``` DefaultValue ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
 | filter |  ``` Optional ```  | Allowed fields: reference, result, bonus_amount, advocate_token, advocate_referrer_token, campaign_slug, from, to, created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
 | sort |  ``` Optional ```  | Allowed fields: created. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
 
@@ -1529,8 +1556,8 @@ function getBonusesTraces(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 211;
-$limit = 211;
+$page = 1;
+$limit = 10;
 $filter = 'filter';
 $sort = 'sort';
 
@@ -1590,8 +1617,8 @@ $result = $campaigns->getCampaign($accountSlug, $campaignSlug);
 ```php
 function getCampaigns(
         $accountSlug,
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null)
 ```
@@ -1601,8 +1628,8 @@ function getCampaigns(
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
-| page |  ``` Optional ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
-| limit |  ``` Optional ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
+| page |  ``` Optional ```  ``` DefaultValue ```  | Page number, e.g. 1 would start at the first result, and 10 would start at the tenth result. |
+| limit |  ``` Optional ```  ``` DefaultValue ```  | Maximum number of results to return in the response. Default (10), threshold (100) |
 | filter |  ``` Optional ```  | Allowed fields: name, description, start_date, end_date, is_active (true\|false), created. Use the following delimiters to build your filters params. The vertical bar ('\|') to separate individual filter phrases and a double colon ('::') to separate the names and values. The delimiter of the double colon (':') separates the property name from the comparison value, enabling the comparison value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::grand poobah' |
 | sort |  ``` Optional ```  | Allowed fields: campaign_slug, created, start_date, end_date, is_active. Use sort query-string parameter that contains a delimited set of property names. For each property name, sort in ascending order, and for each property prefixed with a dash ('-') sort in descending order. Separate each property name with a vertical bar ('\|'), which is consistent with the separation of the name\|value pairs in filtering, above. For example, if we want to retrieve users in order of their last name (ascending), first name (ascending) and hire date (descending), the request might look like this www.example.com/users?sort='last_name\|first_name\|-hire_date' |
 
@@ -1612,8 +1639,8 @@ function getCampaigns(
 
 ```php
 $accountSlug = 'account_slug';
-$page = 211;
-$limit = 211;
+$page = 1;
+$limit = 10;
 $filter = 'filter';
 $sort = 'sort';
 

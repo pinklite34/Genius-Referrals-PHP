@@ -129,8 +129,8 @@ class CampaignsController extends BaseController
      */
     public function getCampaigns(
         $accountSlug,
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null
     ) {
@@ -148,8 +148,8 @@ class CampaignsController extends BaseController
 
         //process optional query parameters
         APIHelper::appendUrlWithQueryParameters($_queryBuilder, array (
-            'page'         => $page,
-            'limit'        => $limit,
+            'page'         => (null != $page) ? $page : 1,
+            'limit'        => (null != $limit) ? $limit : 10,
             'filter'       => $filter,
             'sort'         => $sort,
         ));

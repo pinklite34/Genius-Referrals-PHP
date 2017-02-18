@@ -429,33 +429,33 @@ class RedemptionRequestsController extends BaseController
     /**
      * Get the list of redemption requests.
      *
-     * @param string $accountSlug  The account identifier
-     * @param string $page         (optional) Page number, e.g. 1 would start at the first result, and 10 would start
-     *                             at the tenth result.
-     * @param string $limit        (optional) Maximum number of results to return in the response. Default (10),
-     *                             threshold (100)
-     * @param string $filter       (optional) Allowed fields: redemption_request_id, name, lastname, email,
-     *                             request_status_slug, request_action_slug, from, to, created. Use the following
-     *                             delimiters to build your filters params. The vertical bar ('\|') to separate
-     *                             individual filter phrases and a double colon ('::') to separate the names and values.
-     *                             The delimiter of the double colon (':') separates the property name from the
-     *                             comparison value, enabling the comparison value to contain spaces. Example: www.
-     *                             example.com/users?filter='name::todd\|city::denver\|title::grand poobah'
-     * @param string $sort         (optional) Allowed fields: name, lastname, email, created. Use sort query-string
-     *                             parameter that contains a delimited set of property names. For each property name,
-     *                             sort in ascending order, and for each property prefixed with a dash ('-') sort in
-     *                             descending order. Separate each property name with a vertical bar ('\|'), which is
-     *                             consistent with the separation of the name\|value pairs in filtering, above. For
-     *                             example, if we want to retrieve users in order of their last name (ascending), first
-     *                             name (ascending) and hire date (descending), the request might look like this www.
-     *                             example.com/users?sort='last_name\|first_name\|-hire_date'
+     * @param string  $accountSlug  The account identifier
+     * @param integer $page         (optional) Page number, e.g. 1 would start at the first result, and 10 would start
+     *                              at the tenth result.
+     * @param integer $limit        (optional) Maximum number of results to return in the response. Default (10),
+     *                              threshold (100)
+     * @param string  $filter       (optional) Allowed fields: redemption_request_id, name, lastname, email,
+     *                              request_status_slug, request_action_slug, from, to, created. Use the following
+     *                              delimiters to build your filters params. The vertical bar ('\|') to separate
+     *                              individual filter phrases and a double colon ('::') to separate the names and
+     *                              values. The delimiter of the double colon (':') separates the property name from
+     *                              the comparison value, enabling the comparison value to contain spaces. Example: www.
+     *                              example.com/users?filter='name::todd\|city::denver\|title::grand poobah'
+     * @param string  $sort         (optional) Allowed fields: name, lastname, email, created. Use sort query-string
+     *                              parameter that contains a delimited set of property names. For each property name,
+     *                              sort in ascending order, and for each property prefixed with a dash ('-') sort in
+     *                              descending order. Separate each property name with a vertical bar ('\|'), which is
+     *                              consistent with the separation of the name\|value pairs in filtering, above. For
+     *                              example, if we want to retrieve users in order of their last name (ascending),
+     *                              first name (ascending) and hire date (descending), the request might look like this
+     *                              www.example.com/users?sort='last_name\|first_name\|-hire_date'
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function getRedemptionRequests(
         $accountSlug,
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null
     ) {
@@ -473,8 +473,8 @@ class RedemptionRequestsController extends BaseController
 
         //process optional query parameters
         APIHelper::appendUrlWithQueryParameters($_queryBuilder, array (
-            'page'         => $page,
-            'limit'        => $limit,
+            'page'         => (null != $page) ? $page : 1,
+            'limit'        => (null != $limit) ? $limit : 10,
             'filter'       => $filter,
             'sort'         => $sort,
         ));
@@ -511,5 +511,58 @@ class RedemptionRequestsController extends BaseController
         $this->validateResponse($_httpResponse, $_httpContext);
 
         return $response->body;
+    }
+
+    /**
+     * @todo Add general description for this endpoint
+     *
+     * @param string $operation TODO: type description here
+     * @return void response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getTest(
+        $operation
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/{operation}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'operation' => $operation,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'APIMATIC 2.0',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
     }
 }

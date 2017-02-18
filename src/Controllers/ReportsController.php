@@ -167,7 +167,7 @@ class ReportsController extends BaseController
     public function getTopAdvocates(
         $accountSlug = null,
         $campaignSlug = null,
-        $limit = null,
+        $limit = 10,
         $from = null,
         $to = null
     ) {
@@ -182,7 +182,7 @@ class ReportsController extends BaseController
         APIHelper::appendUrlWithQueryParameters($_queryBuilder, array (
             'account_slug'  => $accountSlug,
             'campaign_slug' => $campaignSlug,
-            'limit'         => $limit,
+            'limit'         => (null != $limit) ? $limit : 10,
             'from'          => $from,
             'to'            => $to,
         ));

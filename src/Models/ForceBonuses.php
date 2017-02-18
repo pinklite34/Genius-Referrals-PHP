@@ -12,7 +12,7 @@ use JsonSerializable;
 /**
  * A bonus structure
  */
-class Bonuses1 implements JsonSerializable
+class ForceBonuses implements JsonSerializable
 {
     /**
      * The referral's token.

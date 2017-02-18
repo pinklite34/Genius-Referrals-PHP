@@ -122,8 +122,8 @@ class AccountsController extends BaseController
      * @throws APIException Thrown if API call fails
      */
     public function getAccounts(
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null
     ) {
@@ -136,8 +136,8 @@ class AccountsController extends BaseController
 
         //process optional query parameters
         APIHelper::appendUrlWithQueryParameters($_queryBuilder, array (
-            'page'   => $page,
-            'limit'  => $limit,
+            'page'   => (null != $page) ? $page : 1,
+            'limit'  => (null != $limit) ? $limit : 10,
             'filter' => $filter,
             'sort'   => $sort,
         ));

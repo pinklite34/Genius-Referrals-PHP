@@ -10,20 +10,20 @@ namespace GeniusReferralsLib\Models;
 use JsonSerializable;
 
 /**
- * The bonuses' form
+ * The force bonuses' form
  */
-class BonusesForm1 implements JsonSerializable
+class ForceBonusesForm implements JsonSerializable
 {
     /**
      * The bonuses' wrapper
      * @required
-     * @var Bonuses1 $bonus public property
+     * @var ForceBonuses $bonus public property
      */
     public $bonus;
 
     /**
      * Constructor to set initial or default values of member properties
-     * @param Bonuses1 $bonus Initialization value for $this->bonus
+     * @param ForceBonuses $bonus Initialization value for $this->bonus
      */
     public function __construct()
     {

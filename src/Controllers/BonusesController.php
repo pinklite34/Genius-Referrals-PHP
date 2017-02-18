@@ -69,8 +69,8 @@ class BonusesController extends BaseController
      */
     public function getBonuses(
         $accountSlug,
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null
     ) {
@@ -88,8 +88,8 @@ class BonusesController extends BaseController
 
         //process optional query parameters
         APIHelper::appendUrlWithQueryParameters($_queryBuilder, array (
-            'page'         => $page,
-            'limit'        => $limit,
+            'page'         => (null != $page) ? $page : 1,
+            'limit'        => (null != $limit) ? $limit : 10,
             'filter'       => $filter,
             'sort'         => $sort,
         ));
@@ -267,12 +267,12 @@ class BonusesController extends BaseController
      * Force the system to give a bonus to an advocate. The system will not take into account the
      * restriccions specified on the campaigns.
      *
-     * @param string              $accountSlug  The account identifier
-     * @param Models\BonusesForm1 $bonusForm    The body of the request
+     * @param string                  $accountSlug  The account identifier
+     * @param Models\ForceBonusesForm $bonusForm    The body of the request
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function postBonusesForce(
+    public function postForceBonuses(
         $accountSlug,
         $bonusForm
     ) {
@@ -526,8 +526,8 @@ class BonusesController extends BaseController
      */
     public function getBonusesTraces(
         $accountSlug,
-        $page = null,
-        $limit = null,
+        $page = 1,
+        $limit = 10,
         $filter = null,
         $sort = null
     ) {
@@ -545,8 +545,8 @@ class BonusesController extends BaseController
 
         //process optional query parameters
         APIHelper::appendUrlWithQueryParameters($_queryBuilder, array (
-            'page'         => $page,
-            'limit'        => $limit,
+            'page'         => (null != $page) ? $page : 1,
+            'limit'        => (null != $limit) ? $limit : 10,
             'filter'       => $filter,
             'sort'         => $sort,
         ));
