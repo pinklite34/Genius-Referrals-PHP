@@ -480,7 +480,7 @@ function putPaymentMethod(
         $accountSlug,
         $advocateToken,
         $advocatePaymentMethodId,
-        $advocatePaymentMethod)
+        $advocatePaymentMethodForm)
 ```
 
 #### Parameters
@@ -490,7 +490,7 @@ function putPaymentMethod(
 | accountSlug |  ``` Required ```  | The advocate's token |
 | advocateToken |  ``` Required ```  | The advocate's token |
 | advocatePaymentMethodId |  ``` Required ```  | The payment method's identifier |
-| advocatePaymentMethod |  ``` Required ```  | The body of the request |
+| advocatePaymentMethodForm |  ``` Required ```  | The body of the request |
 
 
 
@@ -499,10 +499,10 @@ function putPaymentMethod(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$advocatePaymentMethodId = 230;
-$advocatePaymentMethod = new PaymentMethodForm();
+$advocatePaymentMethodId = 43;
+$advocatePaymentMethodForm = new PaymentMethodForm();
 
-$advocates->putPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethodId, $advocatePaymentMethod);
+$advocates->putPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethodId, $advocatePaymentMethodForm);
 
 ```
 
@@ -534,7 +534,7 @@ function getPaymentMethod(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$advocatePaymentMethodId = 230;
+$advocatePaymentMethodId = 43;
 
 $result = $advocates->getPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethodId);
 
@@ -550,7 +550,7 @@ $result = $advocates->getPaymentMethod($accountSlug, $advocateToken, $advocatePa
 function postPaymentMethod(
         $accountSlug,
         $advocateToken,
-        $advocatePaymentMethod)
+        $advocatePaymentMethodForm)
 ```
 
 #### Parameters
@@ -559,7 +559,7 @@ function postPaymentMethod(
 |-----------|------|-------------|
 | accountSlug |  ``` Required ```  | The account identifier |
 | advocateToken |  ``` Required ```  | The advocate's token |
-| advocatePaymentMethod |  ``` Required ```  | The body of the request |
+| advocatePaymentMethodForm |  ``` Required ```  | The body of the request |
 
 
 
@@ -568,9 +568,9 @@ function postPaymentMethod(
 ```php
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
-$advocatePaymentMethod = new PaymentMethodForm();
+$advocatePaymentMethodForm = new PaymentMethodForm();
 
-$result = $advocates->postPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethod);
+$result = $advocates->postPaymentMethod($accountSlug, $advocateToken, $advocatePaymentMethodForm);
 
 ```
 
@@ -1415,7 +1415,7 @@ function patchRedemptionRequest(
 
 ```php
 $accountSlug = 'account_slug';
-$redemptionRequestId = 66;
+$redemptionRequestId = 135;
 
 $redemptionRequests->patchRedemptionRequest($accountSlug, $redemptionRequestId);
 
@@ -1637,7 +1637,7 @@ function getBonusCheckup(
 $accountSlug = 'account_slug';
 $advocateToken = 'advocate_token';
 $reference = 'reference';
-$paymentAmount = 25.2362748306414;
+$paymentAmount = 135.352055237327;
 
 $result = $bonuses->getBonusCheckup($accountSlug, $advocateToken, $reference, $paymentAmount);
 
@@ -1699,7 +1699,7 @@ function getBonusTrace(
 
 ```php
 $accountSlug = 'account_slug';
-$traceId = 25;
+$traceId = 135;
 
 $result = $bonuses->getBonusTrace($accountSlug, $traceId);
 
@@ -1730,7 +1730,7 @@ function deleteBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 25;
+$bonusId = 135;
 
 $bonuses->deleteBonus($accountSlug, $bonusId);
 
@@ -1761,7 +1761,7 @@ function getBonus(
 
 ```php
 $accountSlug = 'account_slug';
-$bonusId = 25;
+$bonusId = 135;
 
 $result = $bonuses->getBonus($accountSlug, $bonusId);
 

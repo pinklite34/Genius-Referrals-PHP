@@ -540,10 +540,10 @@ class AdvocatesController extends BaseController
     /**
      * Update a payment method.
      *
-     * @param string                   $accountSlug                The advocate's token
-     * @param string                   $advocateToken              The advocate's token
-     * @param integer                  $advocatePaymentMethodId    The payment method's identifier
-     * @param Models\PaymentMethodForm $advocatePaymentMethod      The body of the request
+     * @param string                   $accountSlug                  The advocate's token
+     * @param string                   $advocateToken                The advocate's token
+     * @param integer                  $advocatePaymentMethodId      The payment method's identifier
+     * @param Models\PaymentMethodForm $advocatePaymentMethodForm    The body of the request
      * @return void response from the API call
      * @throws APIException Thrown if API call fails
      */
@@ -551,7 +551,7 @@ class AdvocatesController extends BaseController
         $accountSlug,
         $advocateToken,
         $advocatePaymentMethodId,
-        $advocatePaymentMethod
+        $advocatePaymentMethodForm
     ) {
 
         //the base uri for api requests
@@ -562,9 +562,9 @@ class AdvocatesController extends BaseController
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'account_slug'               => $accountSlug,
-            'advocate_token'             => $advocateToken,
-            'advocate_payment_method_id' => $advocatePaymentMethodId,
+            'account_slug'                 => $accountSlug,
+            'advocate_token'               => $advocateToken,
+            'advocate_payment_method_id'   => $advocatePaymentMethodId,
             ));
 
         //validate and preprocess url
@@ -572,8 +572,8 @@ class AdvocatesController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'               => 'APIMATIC 2.0',
-            'content-type'             => 'application/json; charset=utf-8',
+            'user-agent'                 => 'APIMATIC 2.0',
+            'content-type'               => 'application/json; charset=utf-8',
             'Content-Type' => Configuration::$contentType,
             'X-Auth-Token' => Configuration::$xAuthToken
         );
@@ -585,7 +585,7 @@ class AdvocatesController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::put($_queryUrl, $_headers, Request\Body::Json($advocatePaymentMethod));
+        $response = Request::put($_queryUrl, $_headers, Request\Body::Json($advocatePaymentMethodForm));
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
@@ -664,16 +664,16 @@ class AdvocatesController extends BaseController
     /**
      * Create a new payment method.
      *
-     * @param string                   $accountSlug             The account identifier
-     * @param string                   $advocateToken           The advocate's token
-     * @param Models\PaymentMethodForm $advocatePaymentMethod   The body of the request
+     * @param string                   $accountSlug                  The account identifier
+     * @param string                   $advocateToken                The advocate's token
+     * @param Models\PaymentMethodForm $advocatePaymentMethodForm    The body of the request
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function postPaymentMethod(
         $accountSlug,
         $advocateToken,
-        $advocatePaymentMethod
+        $advocatePaymentMethodForm
     ) {
 
         //the base uri for api requests
@@ -684,8 +684,8 @@ class AdvocatesController extends BaseController
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'account_slug'            => $accountSlug,
-            'advocate_token'          => $advocateToken,
+            'account_slug'                 => $accountSlug,
+            'advocate_token'               => $advocateToken,
             ));
 
         //validate and preprocess url
@@ -693,9 +693,9 @@ class AdvocatesController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'            => 'APIMATIC 2.0',
-            'Accept'                => 'application/json',
-            'content-type'          => 'application/json; charset=utf-8',
+            'user-agent'                 => 'APIMATIC 2.0',
+            'Accept'                     => 'application/json',
+            'content-type'               => 'application/json; charset=utf-8',
             'Content-Type' => Configuration::$contentType,
             'X-Auth-Token' => Configuration::$xAuthToken
         );
@@ -707,7 +707,7 @@ class AdvocatesController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($advocatePaymentMethod));
+        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($advocatePaymentMethodForm));
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
