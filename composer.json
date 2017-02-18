@@ -1,18 +1,20 @@
 {
-    "name": "apimatic/geniusreferrals",
+    "name": "geniusreferrals/geniusreferrals",
     "type": "library",
-    "description": "The Genius Referrals API",
-    "keywords": ["Genius Referrals","API","SDK"],
-    "homepage": "https://apimatic.io",
+    "description": "This client allows you to implement referral programs using the Genius Referrals RESTful API.",
+    "keywords": ["geniusreferrals", "referral marketing programs", "word of mouse", "promotion programs", "referral programs", "referral", "refer a friend", "refer", "referral", "promotion campaigns", "referral campaigns", "marketing campaigns", "afiliation", "affiliate", "refer friend", "affiliates"],
+    "homepage": "http://www.geniusreferrals.com",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mehdi Jaffery",
-            "email": "mehdi.jaffery@apimatic.io",
-            "homepage": "https://github.com/apimatic",
-            "role": "Developer"
+            "name": "Genius Referrals",
+            "email": "dev@geniusreferrals.com",
+            "homepage": "http://www.geniusreferrals.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/GeniusReferrals/Genius-Referrals-PHP/issues"
+    },
     "require": {
         "php": ">=5.4.0",
         "ext-curl": "*",
