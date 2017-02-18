@@ -21,16 +21,16 @@ use Unirest\Request;
 /**
  * @todo Add a general description for this controller.
  */
-class AuthenticationsController extends BaseController
+class RootsController extends BaseController
 {
     /**
-     * @var AuthenticationsController The reference to *Singleton* instance of this class
+     * @var RootsController The reference to *Singleton* instance of this class
      */
     private static $instance;
 
     /**
      * Returns the *Singleton* instance of this class.
-     * @return AuthenticationsController The *Singleton* instance.
+     * @return RootsController The *Singleton* instance.
      */
     public static function getInstance()
     {
@@ -42,19 +42,19 @@ class AuthenticationsController extends BaseController
     }
 
     /**
-     * Allow clients to test authentication on Genius Referrals platform.
+     * The root of the API
      *
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function getAuthentication()
+    public function getRoot()
     {
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
         
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/test-authentication';
+        $_queryBuilder = $_queryBuilder.'/';
 
         //validate and preprocess url
         $_queryUrl = APIHelper::cleanUrl($_queryBuilder);

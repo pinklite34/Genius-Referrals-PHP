@@ -103,10 +103,10 @@ class AdvocatesController extends BaseController
      * @param string              $accountSlug    The account identifier
      * @param string              $advocateToken  The advocate's token
      * @param Models\AdvocateForm $advocateForm   The body of the request
-     * @return mixed response from the API call
+     * @return void response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function updateAdvocate(
+    public function putAdvocate(
         $accountSlug,
         $advocateToken,
         $advocateForm
@@ -130,7 +130,6 @@ class AdvocatesController extends BaseController
         //prepare headers
         $_headers = array (
             'user-agent'    => 'APIMATIC 2.0',
-            'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8',
             'Content-Type' => Configuration::$contentType,
             'X-Auth-Token' => Configuration::$xAuthToken
@@ -155,67 +154,6 @@ class AdvocatesController extends BaseController
 
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
-
-        return $response->body;
-    }
-
-    /**
-     * Update partial elements of an advocate.
-     *
-     * @param string $accountSlug    The account identifier
-     * @param string $advocateToken  The advocate's token
-     * @return mixed response from the API call
-     * @throws APIException Thrown if API call fails
-     */
-    public function patchAdvocate(
-        $accountSlug,
-        $advocateToken
-    ) {
-
-        //the base uri for api requests
-        $_queryBuilder = Configuration::$BASEURI;
-        
-        //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/advocates/{advocate_token}';
-
-        //process optional query parameters
-        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'account_slug'   => $accountSlug,
-            'advocate_token' => $advocateToken,
-            ));
-
-        //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
-
-        //prepare headers
-        $_headers = array (
-            'user-agent'    => 'APIMATIC 2.0',
-            'Accept'        => 'application/json',
-            'Content-Type' => Configuration::$contentType,
-            'X-Auth-Token' => Configuration::$xAuthToken
-        );
-
-        //call on-before Http callback
-        $_httpRequest = new HttpRequest(HttpMethod::PATCH, $_headers, $_queryUrl);
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
-        }
-
-        //and invoke the API call request to fetch the response
-        $response = Request::patch($_queryUrl, $_headers);
-
-        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
-        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
-
-        //call on-after Http callback
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
-        }
-
-        //handle errors defined at the API level
-        $this->validateResponse($_httpResponse, $_httpContext);
-
-        return $response->body;
     }
 
     /**
@@ -441,6 +379,613 @@ class AdvocatesController extends BaseController
             'limit'        => (null != $limit) ? $limit : 10,
             'filter'       => $filter,
             'sort'         => $sort,
+        ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'APIMATIC 2.0',
+            'Accept'        => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Update partial elements of an advocate.
+     *
+     * @param string $accountSlug         The account identifier
+     * @param string $advocateToken       The advocate's token
+     * @param array  $advocatePatchForm   The body of the request
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function patchAdvocate(
+        $accountSlug,
+        $advocateToken,
+        $advocatePatchForm
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/advocates/{advocate_token}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'        => $accountSlug,
+            'advocate_token'      => $advocateToken,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'        => 'APIMATIC 2.0',
+            'Accept'            => 'application/json',
+            'content-type'      => 'application/json; charset=utf-8',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::PATCH, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::patch($_queryUrl, $_headers, Request\Body::Json($advocatePatchForm));
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get the advocates share links. These are the links that advocates use to share your services online.
+     * Share links are wrapped per campaign and widget package.
+     *
+     * @param string $accountSlug    The account identifier
+     * @param string $advocateToken  The advocate's token
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getShareLinks(
+        $accountSlug,
+        $advocateToken
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/advocates/{advocate_token}/share-links';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'   => $accountSlug,
+            'advocate_token' => $advocateToken,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'APIMATIC 2.0',
+            'Accept'        => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Update a payment method.
+     *
+     * @param string                   $accountSlug                  The advocate's token
+     * @param string                   $advocateToken                The advocate's token
+     * @param integer                  $advocatePaymentMethodId      The payment method's identifier
+     * @param Models\PaymentMethodForm $advocatePaymentMethodForm    The body of the request
+     * @return void response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function putPaymentMethod(
+        $accountSlug,
+        $advocateToken,
+        $advocatePaymentMethodId,
+        $advocatePaymentMethodForm
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/advocates/{advocate_token}/payment-methods/{advocate_payment_method_id}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'                 => $accountSlug,
+            'advocate_token'               => $advocateToken,
+            'advocate_payment_method_id'   => $advocatePaymentMethodId,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'                 => 'APIMATIC 2.0',
+            'content-type'               => 'application/json; charset=utf-8',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::PUT, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::put($_queryUrl, $_headers, Request\Body::Json($advocatePaymentMethodForm));
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+    }
+
+    /**
+     * Get an advocate's payment method
+     *
+     * @param string  $accountSlug                The account identifier
+     * @param string  $advocateToken              The advocate's token
+     * @param integer $advocatePaymentMethodId    The payment method's identifier
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getPaymentMethod(
+        $accountSlug,
+        $advocateToken,
+        $advocatePaymentMethodId
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/advocates/{advocate_token}/payment-methods/{advocate_payment_method_id}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'               => $accountSlug,
+            'advocate_token'             => $advocateToken,
+            'advocate_payment_method_id' => $advocatePaymentMethodId,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'               => 'APIMATIC 2.0',
+            'Accept'                   => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Create a new payment method.
+     *
+     * @param string                   $accountSlug                  The account identifier
+     * @param string                   $advocateToken                The advocate's token
+     * @param Models\PaymentMethodForm $advocatePaymentMethodForm    The body of the request
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function postPaymentMethod(
+        $accountSlug,
+        $advocateToken,
+        $advocatePaymentMethodForm
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/advocates/{advocate_token}/payment-methods';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'                 => $accountSlug,
+            'advocate_token'               => $advocateToken,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'                 => 'APIMATIC 2.0',
+            'Accept'                     => 'application/json',
+            'content-type'               => 'application/json; charset=utf-8',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::POST, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($advocatePaymentMethodForm));
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get bonuses redemption method.
+     *
+     * @param string $bonusesRedemptionMethodSlug    The bonus redemption method's identifier
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getBonusRedemptionMethod(
+        $bonusesRedemptionMethodSlug
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/utilities/bonuses-redemption-methods/{bonuses_redemption_method_slug}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'bonuses_redemption_method_slug' => $bonusesRedemptionMethodSlug,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'                   => 'APIMATIC 2.0',
+            'Accept'                       => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get bonuses redemption methods.
+     *
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getBonusRedemptionMethods()
+    {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/utilities/bonuses-redemption-methods';
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'APIMATIC 2.0',
+            'Accept'        => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get currencies.
+     *
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getCurrencies()
+    {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/utilities/currencies';
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'APIMATIC 2.0',
+            'Accept'        => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get a currency.
+     *
+     * @param string $code The currency's code
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getCurrency(
+        $code
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/utilities/currencies/{code}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'code' => $code,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'APIMATIC 2.0',
+            'Accept'        => 'application/json',
+            'Content-Type' => Configuration::$contentType,
+            'X-Auth-Token' => Configuration::$xAuthToken
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
+    }
+
+    /**
+     * Get the advocate's payment methods.
+     *
+     * @param string  $accountSlug    The account identifier
+     * @param string  $advocateToken  The advocate's token
+     * @param integer $page           (optional) Page number, e.g. 1 would start at the first result, and 10 would
+     *                                start at the tenth result.
+     * @param integer $limit          (optional) Maximum number of results to return in the response. Default (10),
+     *                                threshold (100)
+     * @param string  $filter         (optional) Allowed fields: username, is_active. Use the following delimiters to
+     *                                build your filters params. The vertical bar ('\|') to separate individual filter
+     *                                phrases and a double colon ('::') to separate the names and values. The delimiter
+     *                                of the double colon (':') separates the property name from the comparison value,
+     *                                enabling the comparison value to contain spaces. Example: www.example.com/users?
+     *                                filter='name::todd\|city::denver\|title::grand poobah'
+     * @param string  $sort           (optional) Allowed fields: username, created. Use sort query-string parameter
+     *                                that contains a delimited set of property names. For each property name, sort in
+     *                                ascending order, and for each property prefixed with a dash ('-') sort in
+     *                                descending order. Separate each property name with a vertical bar ('\|'), which
+     *                                is consistent with the separation of the name\|value pairs in filtering, above.
+     *                                For example, if we want to retrieve users in order of their last name (ascending),
+     *                                first name (ascending) and hire date (descending), the request might look like
+     *                                this www.example.com/users?sort=last_name\|first_name\|-hire_date
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getPaymentMethods(
+        $accountSlug,
+        $advocateToken,
+        $page = 1,
+        $limit = 10,
+        $filter = null,
+        $sort = null
+    ) {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::$BASEURI;
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/advocates/{advocate_token}/payment-methods';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug'   => $accountSlug,
+            'advocate_token' => $advocateToken,
+            ));
+
+        //process optional query parameters
+        APIHelper::appendUrlWithQueryParameters($_queryBuilder, array (
+            'page'           => (null != $page) ? $page : 1,
+            'limit'          => (null != $limit) ? $limit : 10,
+            'filter'         => $filter,
+            'sort'           => $sort,
         ));
 
         //validate and preprocess url

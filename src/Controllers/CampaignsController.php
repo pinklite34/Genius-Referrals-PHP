@@ -21,16 +21,16 @@ use Unirest\Request;
 /**
  * @todo Add a general description for this controller.
  */
-class AccountsController extends BaseController
+class CampaignsController extends BaseController
 {
     /**
-     * @var AccountsController The reference to *Singleton* instance of this class
+     * @var CampaignsController The reference to *Singleton* instance of this class
      */
     private static $instance;
 
     /**
      * Returns the *Singleton* instance of this class.
-     * @return AccountsController The *Singleton* instance.
+     * @return CampaignsController The *Singleton* instance.
      */
     public static function getInstance()
     {
@@ -42,25 +42,28 @@ class AccountsController extends BaseController
     }
 
     /**
-     * Get an account by a given slug.
+     * Get a campaign by a given slug.
      *
-     * @param string $accountSlug  The account identifier
+     * @param string $accountSlug   The account identifier
+     * @param string $campaignSlug  The campaign identifier
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function getAccount(
-        $accountSlug
+    public function getCampaign(
+        $accountSlug,
+        $campaignSlug
     ) {
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
         
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}';
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/campaigns/{campaign_slug}';
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'account_slug' => $accountSlug,
+            'account_slug'  => $accountSlug,
+            'campaign_slug' => $campaignSlug,
             ));
 
         //validate and preprocess url
@@ -98,30 +101,34 @@ class AccountsController extends BaseController
     }
 
     /**
-     * Get the list of accounts.
+     * Get the list of campaings for a given account.
      *
-     * @param integer $page   (optional) Page number, e.g. 1 would start at the first result, and 10 would start at the
-     *                        tenth result.
-     * @param integer $limit  (optional) Maximum number of results to return in the response. Default (10), threshold
-     *                        (100)
-     * @param string  $filter (optional) Allowed fields: name. Use the following delimiters to build your filters
-     *                        params. The vertical bar ('\|') to separate individual filter phrases and a double colon
-     *                        ('::') to separate the names and values. The delimiter of the double colon (':')
-     *                        separates the property name from the comparison value, enabling the comparison value to
-     *                        contain spaces. Example: www.example.com/users?filter='name::todd\|city::denver\|title::
-     *                        grand poobah'
-     * @param string  $sort   (optional) Allowed fields: name, created. Use sort query-string parameter that contains a
-     *                        delimited set of property names. For each property name, sort in ascending order, and for
-     *                        each property prefixed with a dash ('-') sort in descending order. Separate each property
-     *                        name with a vertical bar ('\|'), which is consistent with the separation of the
-     *                        name\|value pairs in filtering, above. For example, if we want to retrieve users in order
-     *                        of their last name (ascending), first name (ascending) and hire date (descending), the
-     *                        request might look like this www.example.com/users?sort=last_name\|first_name\|-
-     *                        hire_date
+     * @param string  $accountSlug  The account identifier
+     * @param integer $page         (optional) Page number, e.g. 1 would start at the first result, and 10 would start
+     *                              at the tenth result.
+     * @param integer $limit        (optional) Maximum number of results to return in the response. Default (10),
+     *                              threshold (100)
+     * @param string  $filter       (optional) Allowed fields: name, description, start_date, end_date, is_active
+     *                              (true\|false), created. Use the following delimiters to build your filters params.
+     *                              The vertical bar ('\|') to separate individual filter phrases and a double colon (':
+     *                              :') to separate the names and values. The delimiter of the double colon (':')
+     *                              separates the property name from the comparison value, enabling the comparison
+     *                              value to contain spaces. Example: www.example.com/users?filter='name::todd\|city::
+     *                              denver\|title::grand poobah'
+     * @param string  $sort         (optional) Allowed fields: campaign_slug, created, start_date, end_date, is_active.
+     *                              Use sort query-string parameter that contains a delimited set of property names.
+     *                              For each property name, sort in ascending order, and for each property prefixed
+     *                              with a dash ('-') sort in descending order. Separate each property name with a
+     *                              vertical bar ('\|'), which is consistent with the separation of the name\|value
+     *                              pairs in filtering, above. For example, if we want to retrieve users in order of
+     *                              their last name (ascending), first name (ascending) and hire date (descending), the
+     *                              request might look like this www.example.com/users?sort='last_name\|first_name\|-
+     *                              hire_date'
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function getAccounts(
+    public function getCampaigns(
+        $accountSlug,
         $page = 1,
         $limit = 10,
         $filter = null,
@@ -132,14 +139,19 @@ class AccountsController extends BaseController
         $_queryBuilder = Configuration::$BASEURI;
         
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/accounts';
+        $_queryBuilder = $_queryBuilder.'/accounts/{account_slug}/campaigns';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'account_slug' => $accountSlug,
+            ));
 
         //process optional query parameters
         APIHelper::appendUrlWithQueryParameters($_queryBuilder, array (
-            'page'   => (null != $page) ? $page : 1,
-            'limit'  => (null != $limit) ? $limit : 10,
-            'filter' => $filter,
-            'sort'   => $sort,
+            'page'         => (null != $page) ? $page : 1,
+            'limit'        => (null != $limit) ? $limit : 10,
+            'filter'       => $filter,
+            'sort'         => $sort,
         ));
 
         //validate and preprocess url
